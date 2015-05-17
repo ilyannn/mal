@@ -19,11 +19,16 @@
 }
 
 - (instancetype)initWithOuter:(Environment *)outer {
+    return [self initWithOuter:outer binds:nil exprs:nil];
+}
+
+- (instancetype)initWithOuter:(Environment *)outer binds:(NSArray *)binds exprs:(NSArray *)exprs {
     if (self = [super init]) {
         _outer = outer;
-        _data = [NSMutableDictionary new];
+        _data = [NSMutableDictionary dictionaryWithObjects:exprs forKeys:binds];
     }
     return self;
+    
 }
 
 - (void)set:(id)anObject forSymbol:(NSString *)symbol {
