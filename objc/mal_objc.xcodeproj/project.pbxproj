@@ -16,20 +16,20 @@
 		BA14D8931B092D800073D98B /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = BA14D8871B092A1E0073D98B /* main.m */; };
 		BA14D8941B092D800073D98B /* NSArray+Functional.m in Sources */ = {isa = PBXBuildFile; fileRef = BA14D88B1B092D1B0073D98B /* NSArray+Functional.m */; };
 		BA14D89C1B092DC60073D98B /* step2_eval.m in Sources */ = {isa = PBXBuildFile; fileRef = BA14D89B1B092DC60073D98B /* step2_eval.m */; };
-		BA14D8A21B09321F0073D98B /* Operation.m in Sources */ = {isa = PBXBuildFile; fileRef = BA14D8A11B09321F0073D98B /* Operation.m */; };
+		BA14D8A21B09321F0073D98B /* Function.m in Sources */ = {isa = PBXBuildFile; fileRef = BA14D8A11B09321F0073D98B /* Function.m */; };
 		BA14D8A91B0938690073D98B /* Tokenizer.m in Sources */ = {isa = PBXBuildFile; fileRef = BA3A5B341B0902350081CE50 /* Tokenizer.m */; };
 		BA14D8AA1B0938690073D98B /* Reader.m in Sources */ = {isa = PBXBuildFile; fileRef = BA3A5B481B090A9A0081CE50 /* Reader.m */; };
 		BA14D8AB1B0938690073D98B /* Printer.m in Sources */ = {isa = PBXBuildFile; fileRef = BA3A5B4C1B0910040081CE50 /* Printer.m */; };
 		BA14D8AD1B0938690073D98B /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = BA14D8871B092A1E0073D98B /* main.m */; };
 		BA14D8AE1B0938690073D98B /* Environment.m in Sources */ = {isa = PBXBuildFile; fileRef = BA14D8A41B0938190073D98B /* Environment.m */; };
-		BA14D8AF1B0938690073D98B /* Operation.m in Sources */ = {isa = PBXBuildFile; fileRef = BA14D8A11B09321F0073D98B /* Operation.m */; };
+		BA14D8AF1B0938690073D98B /* Function.m in Sources */ = {isa = PBXBuildFile; fileRef = BA14D8A11B09321F0073D98B /* Function.m */; };
 		BA14D8B01B0938690073D98B /* NSArray+Functional.m in Sources */ = {isa = PBXBuildFile; fileRef = BA14D88B1B092D1B0073D98B /* NSArray+Functional.m */; };
 		BA14D8BA1B0942C50073D98B /* Tokenizer.m in Sources */ = {isa = PBXBuildFile; fileRef = BA3A5B341B0902350081CE50 /* Tokenizer.m */; };
 		BA14D8BB1B0942C50073D98B /* Reader.m in Sources */ = {isa = PBXBuildFile; fileRef = BA3A5B481B090A9A0081CE50 /* Reader.m */; };
 		BA14D8BD1B0942C50073D98B /* Printer.m in Sources */ = {isa = PBXBuildFile; fileRef = BA3A5B4C1B0910040081CE50 /* Printer.m */; };
 		BA14D8BE1B0942C50073D98B /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = BA14D8871B092A1E0073D98B /* main.m */; };
 		BA14D8BF1B0942C50073D98B /* Environment.m in Sources */ = {isa = PBXBuildFile; fileRef = BA14D8A41B0938190073D98B /* Environment.m */; };
-		BA14D8C01B0942C50073D98B /* Operation.m in Sources */ = {isa = PBXBuildFile; fileRef = BA14D8A11B09321F0073D98B /* Operation.m */; };
+		BA14D8C01B0942C50073D98B /* Function.m in Sources */ = {isa = PBXBuildFile; fileRef = BA14D8A11B09321F0073D98B /* Function.m */; };
 		BA14D8C11B0942C50073D98B /* NSArray+Functional.m in Sources */ = {isa = PBXBuildFile; fileRef = BA14D88B1B092D1B0073D98B /* NSArray+Functional.m */; };
 		BA14D8C91B0942EC0073D98B /* step4_if_fn_do.m in Sources */ = {isa = PBXBuildFile; fileRef = BA14D8C81B0942EC0073D98B /* step4_if_fn_do.m */; };
 		BA14D8CA1B09430B0073D98B /* step3_env.m in Sources */ = {isa = PBXBuildFile; fileRef = BA14D8A61B0938620073D98B /* step3_env.m */; };
@@ -96,8 +96,8 @@
 		BA14D89A1B092D800073D98B /* step2_eval */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = step2_eval; sourceTree = BUILT_PRODUCTS_DIR; };
 		BA14D89B1B092DC60073D98B /* step2_eval.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = step2_eval.m; sourceTree = "<group>"; };
 		BA14D89D1B092E790073D98B /* REPL.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = REPL.h; sourceTree = "<group>"; };
-		BA14D8A01B09321F0073D98B /* Operation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Operation.h; sourceTree = "<group>"; };
-		BA14D8A11B09321F0073D98B /* Operation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Operation.m; sourceTree = "<group>"; };
+		BA14D8A01B09321F0073D98B /* Function.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Function.h; sourceTree = "<group>"; };
+		BA14D8A11B09321F0073D98B /* Function.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Function.m; sourceTree = "<group>"; };
 		BA14D8A31B0938190073D98B /* Environment.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Environment.h; sourceTree = "<group>"; };
 		BA14D8A41B0938190073D98B /* Environment.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Environment.m; sourceTree = "<group>"; };
 		BA14D8A61B0938620073D98B /* step3_env.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = step3_env.m; sourceTree = "<group>"; };
@@ -198,8 +198,8 @@
 				BA3A5B481B090A9A0081CE50 /* Reader.m */,
 				BA3A5B4B1B0910040081CE50 /* Printer.h */,
 				BA3A5B4C1B0910040081CE50 /* Printer.m */,
-				BA14D8A01B09321F0073D98B /* Operation.h */,
-				BA14D8A11B09321F0073D98B /* Operation.m */,
+				BA14D8A01B09321F0073D98B /* Function.h */,
+				BA14D8A11B09321F0073D98B /* Function.m */,
 				BA14D8A31B0938190073D98B /* Environment.h */,
 				BA14D8A41B0938190073D98B /* Environment.m */,
 				BA14D8CB1B094D320073D98B /* Core.h */,
@@ -359,7 +359,7 @@
 				BA14D8911B092D800073D98B /* Printer.m in Sources */,
 				BA14D89C1B092DC60073D98B /* step2_eval.m in Sources */,
 				BA14D8931B092D800073D98B /* main.m in Sources */,
-				BA14D8A21B09321F0073D98B /* Operation.m in Sources */,
+				BA14D8A21B09321F0073D98B /* Function.m in Sources */,
 				BA14D8941B092D800073D98B /* NSArray+Functional.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -374,7 +374,7 @@
 				BA14D8AD1B0938690073D98B /* main.m in Sources */,
 				BA14D8AE1B0938690073D98B /* Environment.m in Sources */,
 				BA14D8CA1B09430B0073D98B /* step3_env.m in Sources */,
-				BA14D8AF1B0938690073D98B /* Operation.m in Sources */,
+				BA14D8AF1B0938690073D98B /* Function.m in Sources */,
 				BA14D8B01B0938690073D98B /* NSArray+Functional.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -390,7 +390,7 @@
 				BA14D8BF1B0942C50073D98B /* Environment.m in Sources */,
 				BA14D8CD1B094D320073D98B /* Core.m in Sources */,
 				BA14D8C91B0942EC0073D98B /* step4_if_fn_do.m in Sources */,
-				BA14D8C01B0942C50073D98B /* Operation.m in Sources */,
+				BA14D8C01B0942C50073D98B /* Function.m in Sources */,
 				BA14D8C11B0942C50073D98B /* NSArray+Functional.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

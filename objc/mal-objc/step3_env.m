@@ -19,7 +19,7 @@
 #import "Reader.h"
 #import "Printer.h"
 
-#import "Operation.h"
+#import "Function.h"
 #import "Environment.h"
 #import "NSArray+Functional.h"
 
@@ -48,23 +48,23 @@ NSString *PRINT(id ast) {
 
 + (void)fillEnvironment:(Environment *)environment {
     
-    [environment set: [Operation operationWithIntegers:
+    [environment set: [Function operationWithIntegers:
                        ^NSInteger(NSInteger a, NSInteger b) {
                            return a + b;
                        }] forSymbol: @"+"];
     
     
-    [environment set: [Operation operationWithIntegers:
+    [environment set: [Function operationWithIntegers:
                        ^NSInteger(NSInteger a, NSInteger b) {
                            return a - b;
                        }] forSymbol: @"-"];
     
-    [environment set: [Operation operationWithIntegers:
+    [environment set: [Function operationWithIntegers:
                        ^NSInteger(NSInteger a, NSInteger b) {
                            return a * b;
                        }] forSymbol: @"*"];
     
-    [environment set: [Operation operationWithIntegers:
+    [environment set: [Function operationWithIntegers:
                        ^NSInteger(NSInteger a, NSInteger b) {
                            return a / b;
                        }] forSymbol: @"/"];
@@ -107,8 +107,8 @@ NSString *PRINT(id ast) {
 
     NSArray *evaluated = [self eval_ast:ast env:env];
     
-    Operation *op = [evaluated firstObject];
-    if (![op isKindOfClass:[Operation class]]) {
+    Function *op = [evaluated firstObject];
+    if (![op isKindOfClass:[Function class]]) {
         @throw [NSException exceptionWithName:@"FunctionRequired" 
                                        reason:@"Symbol that is a known function must be the first in a list" 
                                      userInfo:nil];

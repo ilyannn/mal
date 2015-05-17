@@ -13,7 +13,7 @@ void Require(BOOL condition, NSString *explanation, id args);
 void RequireList(id args);
 id RequireElement(NSUInteger index, NSArray *args, Class type);
 
-@interface Operation : NSObject
+@interface Function : NSObject
 
 @property (strong) id(^body)(id);
 
@@ -25,5 +25,5 @@ id RequireElement(NSUInteger index, NSArray *args, Class type);
 
 @end
 
-@interface Operation(Printer) <Printable>
+@interface Function(Printer) <Printable>
 @end

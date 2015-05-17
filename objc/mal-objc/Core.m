@@ -7,7 +7,7 @@
 //
 
 #import "Core.h"
-#import "Operation.h"
+#import "Function.h"
 
 #import "NSArray+Functional.h"
 
@@ -104,7 +104,7 @@
 	
         BOOL numberOp = sign.numberOfArguments == 4;
         
-        return [[Operation alloc] initWithBody:^ id(id args) {
+        return [[Function alloc] initWithBody:^ id(id args) {
             
             // This has a retain cycle.
             NSInvocation *inv = [NSInvocation invocationWithMethodSignature:sign];

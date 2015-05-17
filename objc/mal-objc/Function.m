@@ -6,7 +6,7 @@
 //  Copyright (c) 2015 ilyan. All rights reserved.
 //
 
-#import "Operation.h"
+#import "Function.h"
 
 void Require(BOOL condition, NSString *explanation, id args) {
     if (!condition) {
@@ -29,7 +29,7 @@ id RequireElement(NSUInteger index, NSArray *args, Class type) {
     return element;
 }
 
-@implementation Operation
+@implementation Function
 
 + (instancetype)operationWithIntegers:(NSInteger (^)(NSInteger, NSInteger))body {
     return [[self alloc] initWithBody:^id(id args) {
@@ -53,7 +53,7 @@ id RequireElement(NSUInteger index, NSArray *args, Class type) {
 
 @end
 
-@implementation Operation (Printer)
+@implementation Function (Printer)
 
 - (NSString *)print {
     return @"#<function>";

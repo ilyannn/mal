@@ -19,7 +19,7 @@
 #import "Reader.h"
 #import "Printer.h"
 
-#import "Operation.h"
+#import "Function.h"
 #import "Environment.h"
 #import "Core.h"
 #import "NSArray+Functional.h"
@@ -122,7 +122,7 @@ NSString *PRINT(id ast) {
         case 4: // fn*
             binds = ast[1];
             expr = ast[2];
-            return [[Operation alloc] initWithBody:^id(id args) {
+            return [[Function alloc] initWithBody:^id(id args) {
                 Environment *child = [[Environment alloc] initWithOuter:env 
                                                                   binds:binds 
                                                                   exprs:args];
@@ -133,8 +133,8 @@ NSString *PRINT(id ast) {
     
     NSArray *evaluated = [self eval_ast:ast env:env];
     
-    Operation *op = [evaluated firstObject];
-    if (![op isKindOfClass:[Operation class]]) {
+    Function *op = [evaluated firstObject];
+    if (![op isKindOfClass:[Function class]]) {
         @throw [NSException exceptionWithName:@"FunctionRequired" 
                                        reason:@"Symbol that is a known function must be the first in a list" 
                                      userInfo:nil];
