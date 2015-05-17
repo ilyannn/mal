@@ -6,15 +6,7 @@
 //  Copyright (c) 2015 ilyan. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
-
-extern id READ(NSString *line);
-extern NSString *PRINT(id ast);
-extern id EVAL(id ast);
-
-NSString *rep(NSString *line) {
-    return PRINT(EVAL(READ(line)));
-}
+#import "REPL.h"
 
 #include <readline/readline.h>
 #include <readline/history.h>
@@ -22,6 +14,8 @@ NSString *rep(NSString *line) {
 NSString * const prompt = @"user> ";  
 
 int main(int argc, const char * argv[]) {
+    
+    REPL *repl = [REPL new];
     
     for(;;) {
         char *line = readline([prompt UTF8String]);
@@ -36,7 +30,7 @@ int main(int argc, const char * argv[]) {
                 add_history(line);
                 free(line); 
 
-                printf("%s\n", [rep(input) UTF8String]);
+                printf("%s\n", [[repl rep:input] UTF8String]);
             }
             @catch (NSException *exception) {
                 NSLog(@"Exception occurred: %@", exception);

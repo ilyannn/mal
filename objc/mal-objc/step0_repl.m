@@ -14,7 +14,7 @@
 //  Copyright (c) 2015 ilyan. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
+#import "REPL.h"
 
 id READ(NSString *line) {
     return line;
@@ -27,4 +27,12 @@ NSString *PRINT(id ast) {
 id EVAL(id ast) {
     return ast;
 }
+
+@implementation REPL
+
+- (NSString *)rep:(NSString *)line {
+    return PRINT(EVAL(READ(line)));
+}
+
+@end
 

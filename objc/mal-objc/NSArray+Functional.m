@@ -3,7 +3,6 @@
 //  Copyright (c) 2013 Ilya Nikokoshev. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
 #import "NSArray+Functional.h"
 
 @implementation NSArray (Functional)
