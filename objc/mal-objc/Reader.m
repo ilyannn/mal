@@ -1,5 +1,5 @@
 //
-//  Reader.m
+//  Reader+Read.m
 //  mal_objc
 //
 //  Created by Ilya Nikokoshev on 17/05/15.
@@ -8,34 +8,93 @@
 
 #import "Reader.h"
 
-@interface Reader()
-@property (readonly, copy) NSArray *tokens;
-@property NSUInteger position;
-@end
+#import "Tokenizer.h"
 
+Token const RightParen = @")";
+Token const LeftParen  = @"(";
+
+@interface Reader()
+@property Tokenizer *tokenizer;
+@end
 
 @implementation Reader
 
-- (instancetype)initWithTokens:(NSArray *)tokens {
+#pragma mark - Construction
+
+- (instancetype)initWithString:(NSString *)line {
     if (self = [super init]) {
-        _tokens = [tokens copy];
-        _position = 0;
+        _tokenizer = [[Tokenizer alloc] initWithString:line delimiters:[[self class] delimiterSet]];
     }
     return self;
 }
 
-- (Token)next {
-    if (self.position == _tokens.count) {
-        return nil;
-    }
-    return _tokens[_position++];
++ (NSCharacterSet *)delimiterSet {
+        static dispatch_once_t onceToken;
+        static NSCharacterSet *delimiters;
+        dispatch_once(&onceToken, ^{
+            NSMutableCharacterSet *chars = [NSMutableCharacterSet whitespaceAndNewlineCharacterSet];
+            [chars addCharactersInString:RightParen];
+            [chars addCharactersInString:LeftParen];
+            delimiters = [chars copy];
+        });
+        return delimiters;
+
 }
 
-- (Token)peek {
-    if (self.position == _tokens.count) {
+#pragma mark - Helpers
+
+- (void)consume:(Token)token {
+    if (![token isEqualTo:[self.tokenizer next]]) {
+        @throw @"Unexpected token";
+    }
+}
+
+- (NSNumberFormatter *)numberFormatter {
+    static dispatch_once_t onceToken;
+    static NSNumberFormatter *numberFormatter;
+    dispatch_once(&onceToken, ^{
+        numberFormatter = [NSNumberFormatter new];
+    });
+    
+    NSAssert(numberFormatter, @"Couldn't create number formatter");
+    return numberFormatter;
+}
+
+#pragma mark - Reading
+
+- (id)read_form {
+    Token token = self.tokenizer.peek;
+    if (![token length]) {
         return nil;
     }
-    return _tokens[_position];
+    
+    if ([token isEqual:LeftParen]) {
+        return [self read_list];
+    } else {
+        return [self read_atom];
+    }
+}
+
+- (id)read_list {
+
+    [self consume:LeftParen];
+    
+    NSMutableArray *elements = [NSMutableArray new];
+    while([self.tokenizer.peek isNotEqualTo:RightParen]) {
+        id element = [self read_form]; 
+        [elements addObject:element];
+    }
+    
+    [self consume:RightParen];
+
+    return [elements copy];
+}
+
+
+- (id)read_atom {
+    Token token = [self.tokenizer next];
+    NSNumber *number = [self.numberFormatter numberFromString:token];
+    return number?: token;
 }
 
 @end

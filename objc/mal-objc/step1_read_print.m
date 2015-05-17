@@ -16,21 +16,18 @@
 
 #import <Foundation/Foundation.h>
 
-#import "Reader.h"
+#import "Tokenizer.h"
 
 #include <readline/readline.h>
 #include <readline/history.h>
 
 #import "Reader.h"
-#import "Reader+Tokens.h"
-#import "Reader+Read.h"
 #import "Printer.h"
 
 NSString * const prompt = @"user> ";  
 
 id READ(NSString *line) {
-    Reader *reader = [[Reader alloc] initWithString:line];
-    return [reader read_form];
+    return [[[Reader alloc] initWithString:line] read_form];
 }
 
 NSString *PRINT(id ast) {
@@ -52,8 +49,10 @@ int main(int argc, const char * argv[]) {
     for(;;) {
         @autoreleasepool {
             char *line = readline([prompt UTF8String]);
-            if (!line) { break; }
-            
+            if (!line) { break; }            
+
+            add_history(line);
+
             NSString *input = [NSString stringWithUTF8String:line];
             free(line); 
             // release input string
@@ -62,6 +61,7 @@ int main(int argc, const char * argv[]) {
             // release output string
         }
     } 
+    printf("\n");
     return 0;
 }
 
