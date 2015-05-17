@@ -14,6 +14,10 @@
 
 @implementation Environment
 
+- (instancetype)init {
+    return [self initWithOuter:nil];
+}
+
 - (instancetype)initWithOuter:(Environment *)outer {
     if (self = [super init]) {
         _outer = outer;

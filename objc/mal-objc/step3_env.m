@@ -24,6 +24,7 @@
 #import "NSArray+Functional.h"
 
 @interface REPL ()
+@property (readonly) Environment *globalEnvironment;
 @end
 
 id READ(NSString *line) {
@@ -37,27 +38,37 @@ NSString *PRINT(id ast) {
 
 @implementation REPL
 
-- (void)fillEnvironment:(Environment *)environment {
-    [environment set: [Operation operationWithIntegers:
-                            ^NSInteger(NSInteger a, NSInteger b) {
-        return a + b;
-    }] forSymbol: @"+"];
-     
-    [environment set: [Operation operationWithIntegers:
-                            ^NSInteger(NSInteger a, NSInteger b) {
-                                return a - b;
-                            }] forSymbol: @"-"];
-    
-    [environment set: [Operation operationWithIntegers:
-                            ^NSInteger(NSInteger a, NSInteger b) {
-                                return a * b;
-                            }] forSymbol: @"*"];
-    
-    [environment set: [Operation operationWithIntegers:
-                            ^NSInteger(NSInteger a, NSInteger b) {
-                                return a / b;
-                            }] forSymbol: @"/"];
+- (instancetype)init {
+    if (self = [super init]) {
+        _globalEnvironment = [Environment new];
+        [[self class] fillEnvironment: _globalEnvironment];
+    }
+    return self;
+}
 
++ (void)fillEnvironment:(Environment *)environment {
+    
+    [environment set: [Operation operationWithIntegers:
+                       ^NSInteger(NSInteger a, NSInteger b) {
+                           return a + b;
+                       }] forSymbol: @"+"];
+    
+    
+    [environment set: [Operation operationWithIntegers:
+                       ^NSInteger(NSInteger a, NSInteger b) {
+                           return a - b;
+                       }] forSymbol: @"-"];
+    
+    [environment set: [Operation operationWithIntegers:
+                       ^NSInteger(NSInteger a, NSInteger b) {
+                           return a * b;
+                       }] forSymbol: @"*"];
+    
+    [environment set: [Operation operationWithIntegers:
+                       ^NSInteger(NSInteger a, NSInteger b) {
+                           return a / b;
+                       }] forSymbol: @"/"];
+    
 }
 
 - (id)eval_ast:(id)ast env:(Environment *)env {
@@ -79,7 +90,7 @@ NSString *PRINT(id ast) {
     }
     
     if ([[ast firstObject] isEqual:@"def!"]) {
-        id def = [self eval_ast:ast[2] env:env];
+        id def = [self eval:ast[2] env:env];
         [env set:def forSymbol:ast[1]];
         return def;
     }
@@ -94,9 +105,7 @@ NSString *PRINT(id ast) {
         return [self eval:ast[2] env:child];
     }
 
-    NSArray *evaluated = [ast arrayByMapping:^id(id sub) {
-        return [self eval_ast:sub env:env];
-    }];
+    NSArray *evaluated = [self eval_ast:ast env:env];
     
     Operation *op = [evaluated firstObject];
     if (![op isKindOfClass:[Operation class]]) {
@@ -110,9 +119,7 @@ NSString *PRINT(id ast) {
 }
 
 - (NSString *)rep:(NSString *)line {
-    Environment *environment = [Environment new];
-    [self fillEnvironment:environment];
-    return PRINT([self eval:READ(line) env:environment]);
+    return PRINT([self eval:READ(line) env:self.globalEnvironment]);
 }
 
 @end

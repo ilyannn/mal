@@ -11,7 +11,8 @@
 @interface Environment : NSObject
 @property (readonly) Environment *outer; 
 
-- (instancetype)initWithOuter:(Environment *)outer;
+- (instancetype)init;
+- (instancetype)initWithOuter:(Environment *)outer NS_DESIGNATED_INITIALIZER;
 
 - (void)set:(id)anObject forSymbol:(NSString *)symbol;
 - (Environment *)findEnvironmentForSymbol:(NSString *)symbol;
