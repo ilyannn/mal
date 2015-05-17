@@ -37,13 +37,14 @@ NSString *rep(NSString *line) {
     return PRINT(EVAL(READ(line)));
 }
 
-
 int main(int argc, const char * argv[]) {
     
     for(;;) {
         @autoreleasepool {
             char *line = readline([prompt UTF8String]);
-            if (!line) { break; }
+            if (!line) { break; }            
+            
+            add_history(line);
             
             NSString *input = [NSString stringWithUTF8String:line];
             free(line); 
@@ -53,6 +54,6 @@ int main(int argc, const char * argv[]) {
             // release output string
         }
     } 
+    printf("\n");
     return 0;
 }
-
