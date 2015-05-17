@@ -9,5 +9,12 @@
 #import <Foundation/Foundation.h>
 
 @interface Environment : NSObject
+@property (readonly) Environment *outer; 
+
+- (instancetype)initWithOuter:(Environment *)outer;
+
+- (void)set:(id)anObject forSymbol:(NSString *)symbol;
+- (Environment *)findEnvironmentForSymbol:(NSString *)symbol;
+- (id)getObjectForSymbol:(NSString *)symbol;
 
 @end

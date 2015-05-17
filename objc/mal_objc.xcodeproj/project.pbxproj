@@ -17,7 +17,6 @@
 		BA14D8941B092D800073D98B /* NSArray+Functional.m in Sources */ = {isa = PBXBuildFile; fileRef = BA14D88B1B092D1B0073D98B /* NSArray+Functional.m */; };
 		BA14D89C1B092DC60073D98B /* step2_eval.m in Sources */ = {isa = PBXBuildFile; fileRef = BA14D89B1B092DC60073D98B /* step2_eval.m */; };
 		BA14D8A21B09321F0073D98B /* Operation.m in Sources */ = {isa = PBXBuildFile; fileRef = BA14D8A11B09321F0073D98B /* Operation.m */; };
-		BA14D8A51B0938190073D98B /* Environment.m in Sources */ = {isa = PBXBuildFile; fileRef = BA14D8A41B0938190073D98B /* Environment.m */; };
 		BA14D8A91B0938690073D98B /* Tokenizer.m in Sources */ = {isa = PBXBuildFile; fileRef = BA3A5B341B0902350081CE50 /* Tokenizer.m */; };
 		BA14D8AA1B0938690073D98B /* Reader.m in Sources */ = {isa = PBXBuildFile; fileRef = BA3A5B481B090A9A0081CE50 /* Reader.m */; };
 		BA14D8AB1B0938690073D98B /* Printer.m in Sources */ = {isa = PBXBuildFile; fileRef = BA3A5B4C1B0910040081CE50 /* Printer.m */; };
@@ -309,7 +308,6 @@
 				BA14D8911B092D800073D98B /* Printer.m in Sources */,
 				BA14D89C1B092DC60073D98B /* step2_eval.m in Sources */,
 				BA14D8931B092D800073D98B /* main.m in Sources */,
-				BA14D8A51B0938190073D98B /* Environment.m in Sources */,
 				BA14D8A21B09321F0073D98B /* Operation.m in Sources */,
 				BA14D8941B092D800073D98B /* NSArray+Functional.m in Sources */,
 			);
