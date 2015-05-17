@@ -11,7 +11,7 @@ PYTHON = python
 #
 
 IMPLS = bash c clojure coffee cpp cs erlang factor forth go haskell java \
-	julia js lua make mal ocaml matlab miniMAL nim perl php ps \
+	julia js lua make mal ocaml matlab miniMAL nim objc perl php ps \
 	python r racket ruby rust scala swift vb guile
 
 step0 = step0_repl
@@ -69,6 +69,7 @@ js_STEP_TO_PROG =      js/$($(1)).js
 lua_STEP_TO_PROG =     lua/$($(1)).lua
 make_STEP_TO_PROG =    make/$($(1)).mk
 mal_STEP_TO_PROG =     mal/$($(1)).mal
+objc_STEP_TO_PROG =    objc/$($(1))
 ocaml_STEP_TO_PROG =   ocaml/$($(1))
 matlab_STEP_TO_PROG =  matlab/$($(1)).m
 miniMAL_STEP_TO_PROG = miniMAL/$($(1)).json
@@ -114,6 +115,7 @@ matlab_args =     $(subst $(SPACE),$(COMMA),$(foreach x,$(strip $(1)),'$(x)'))
 matlab_RUNSTEP =  matlab -nodisplay -nosplash -nodesktop -nojvm -r "$($(1))($(call matlab_args,$(3)));quit;"
 miniMAL_RUNSTEP = miniMAL ../$(2) $(3)
 nim_RUNSTEP =     ../$(2) $(3)
+objc_RUNSTEP =    ../$(2) $(3)
 perl_RUNSTEP =    perl ../$(2) $(3)
 php_RUNSTEP =     php ../$(2) $(3)
 ps_RUNSTEP =      $(4)gs -q -I./ -dNODISPLAY -- ../$(2) $(3)$(4)
