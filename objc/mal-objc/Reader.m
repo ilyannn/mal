@@ -10,9 +10,21 @@
 
 #import "Tokenizer.h"
 
-Token const RightParen = @")";
-Token const LeftParen  = @"(";
+Token const RightParen = @")]";
+Token const LeftParen  = @"([";
 Token const Comma      = @",";
+
+@implementation NSString (Parens)
+
+- (BOOL)isRightParen {
+    return [RightParen rangeOfString:self].location != NSNotFound;
+}
+
+- (BOOL)isLeftParen {
+    return [LeftParen rangeOfString:self].location != NSNotFound;
+}
+
+@end
 
 @interface Reader()
 @property Tokenizer *tokenizer;
@@ -47,12 +59,12 @@ Token const Comma      = @",";
 
 #pragma mark - Helpers
 
-- (void)consume:(Token)token {
+- (void)consume:(NSString *)choices {
     id next = [self.tokenizer next];
-    if (![token isEqualTo:next]) {
+    if ([choices rangeOfString:next].location == NSNotFound) {
         @throw [NSException exceptionWithName:@"ReaderUnexpectedToken" 
                                        reason:@"Unexpected token"
-                                     userInfo:@{@"expected": token, 
+                                     userInfo:@{@"expected": choices, 
                                                 @"found": next ?: [NSNull null]}
                 ];;
     }
@@ -77,7 +89,7 @@ Token const Comma      = @",";
         return nil;
     }
     
-    if ([token isEqual:LeftParen]) {
+    if ([token isLeftParen]) {
         return [self read_list];
     } else {
         return [self read_atom];
@@ -89,9 +101,9 @@ Token const Comma      = @",";
     [self consume:LeftParen];
     
     NSMutableArray *elements = [NSMutableArray new];
-    while([self.tokenizer.peek isNotEqualTo:RightParen]) {
+    while(![self.tokenizer.peek isRightParen]) {
         id element = [self read_form]; 
-        if ([element isNotEqualTo:Comma]) {
+        if (![element isEqualTo:Comma]) {
         	[elements addObject:element];
         }
     }

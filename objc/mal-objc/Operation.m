@@ -52,3 +52,11 @@ id RequireElement(NSUInteger index, NSArray *args, Class type) {
 }
 
 @end
+
+@implementation Operation (Printer)
+
+- (NSString *)print {
+    return @"#<function>";
+}
+
+@end

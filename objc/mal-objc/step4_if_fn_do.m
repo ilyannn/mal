@@ -21,6 +21,7 @@
 
 #import "Operation.h"
 #import "Environment.h"
+#import "Core.h"
 #import "NSArray+Functional.h"
 
 @interface REPL ()
@@ -40,35 +41,13 @@ NSString *PRINT(id ast) {
 
 - (instancetype)init {
     if (self = [super init]) {
-        _globalEnvironment = [Environment new];
-        [[self class] fillEnvironment: _globalEnvironment];
-    }
+        Core *core = [Core new];
+        _globalEnvironment = [[Environment alloc] initWithOuter:nil 
+                                                          binds:core.bindings 
+                                                          exprs:core.operations];
+        [self rep:@"(def! not (fn* (a) (if a false true)))"];
+   }
     return self;
-}
-
-+ (void)fillEnvironment:(Environment *)environment {
-    
-    [environment set: [Operation operationWithIntegers:
-                       ^NSInteger(NSInteger a, NSInteger b) {
-                           return a + b;
-                       }] forSymbol: @"+"];
-    
-    
-    [environment set: [Operation operationWithIntegers:
-                       ^NSInteger(NSInteger a, NSInteger b) {
-                           return a - b;
-                       }] forSymbol: @"-"];
-    
-    [environment set: [Operation operationWithIntegers:
-                       ^NSInteger(NSInteger a, NSInteger b) {
-                           return a * b;
-                       }] forSymbol: @"*"];
-    
-    [environment set: [Operation operationWithIntegers:
-                       ^NSInteger(NSInteger a, NSInteger b) {
-                           return a / b;
-                       }] forSymbol: @"/"];
-    
 }
 
 - (id)eval_ast:(id)ast env:(Environment *)env {
@@ -83,28 +62,75 @@ NSString *PRINT(id ast) {
     }
 }
 
+- (BOOL)booleanValue:(id)object { // only false and nil are false
+    if ([[NSNull null] isEqual:object]) {
+        return NO;
+    }
+    if (![object isKindOfClass:[NSNumber class]]) {
+        return YES;
+    }
+    if ([object boolValue]) {
+        return YES;
+    }
+    if (*[object objCType] != 'c') {
+        return YES;
+    }
+    return NO;
+}
+
 - (id)eval:(id)ast env:(Environment *)env{
     
     if (![ast isKindOfClass:[NSArray class]]) {
         return [self eval_ast:ast env:env];
     }
     
-    if ([[ast firstObject] isEqual:@"def!"]) {
-        id def = [self eval:ast[2] env:env];
-        [env set:def forSymbol:ast[1]];
-        return def;
+    NSArray *specials = @[@"def!", @"let*", @"do", @"if", @"fn*"];
+
+    __block __weak id wself = self;
+
+    id def, first;
+    NSInteger index;
+    Environment *child;
+    NSArray *binds;
+    id expr;
+    
+    switch ([specials indexOfObject:[ast firstObject]]) {
+        case 0: // def!
+            def = [self eval:ast[2] env:env];
+            [env set:def forSymbol:ast[1]];
+            return def;
+            
+        case 1: // let*
+            child = [[Environment alloc] initWithOuter:env];
+            for (NSInteger index = 0; index < [ast[1] count];) {
+                NSString *symbol = ast[1][index++];
+                id expr = ast[1][index++];
+                [child set:[self eval:expr env:child] forSymbol:symbol];
+            }
+            return [self eval:ast[2] env:child];
+        
+        case 2: // do
+            return [[ast arrayByMapping:^id(id sub) {
+                return [self eval_ast:sub env:env];
+            }] lastObject];
+            
+        case 3: // if
+            first = [self eval:ast[1] env:env];
+            index = [self booleanValue:first] ? 2 : 3;
+            return [self eval:ast[index] env:env];
+            
+        case 4: // fn*
+            binds = ast[1];
+            expr = ast[2];
+            return [[Operation alloc] initWithBody:^id(id args) {
+                Environment *child = [[Environment alloc] initWithOuter:env 
+                                                                  binds:binds 
+                                                                  exprs:args];
+                return [wself eval:expr env:child];
+                
+            }];            
     }
     
-    if ([[ast firstObject] isEqual:@"let*"]) {
-        Environment *child = [[Environment alloc] initWithOuter:env];
-        for (NSInteger index = 0; index < [ast[1] count];) {
-            NSString *symbol = ast[1][index++];
-            id expr = ast[1][index++];
-            [child set:[self eval:expr env:child] forSymbol:symbol];
-        }
-        return [self eval:ast[2] env:child];
-    }
-
     NSArray *evaluated = [self eval_ast:ast env:env];
     
     Operation *op = [evaluated firstObject];

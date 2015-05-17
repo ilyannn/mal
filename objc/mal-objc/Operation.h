@@ -7,6 +7,11 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "Printer.h"
+
+void Require(BOOL condition, NSString *explanation, id args);
+void RequireList(id args);
+id RequireElement(NSUInteger index, NSArray *args, Class type);
 
 @interface Operation : NSObject
 
@@ -17,4 +22,8 @@
 - (instancetype)initWithBody:(id(^)(id))body;
 
 - (id)evaluateWithArguments:(id)arguments;
+
+@end
+
+@interface Operation(Printer) <Printable>
 @end

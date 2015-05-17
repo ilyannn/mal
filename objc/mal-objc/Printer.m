@@ -25,6 +25,7 @@
 
 @end
 
+
 @implementation NSNumber (Printer)
 
 - (NSNumberFormatter *)numberFormatter {    
