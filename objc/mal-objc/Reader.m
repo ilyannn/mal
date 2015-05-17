@@ -48,8 +48,13 @@ Token const Comma      = @",";
 #pragma mark - Helpers
 
 - (void)consume:(Token)token {
-    if (![token isEqualTo:[self.tokenizer next]]) {
-        @throw @"Unexpected token";
+    id next = [self.tokenizer next];
+    if (![token isEqualTo:next]) {
+        @throw [NSException exceptionWithName:@"ReaderUnexpectedToken" 
+                                       reason:@"Unexpected token"
+                                     userInfo:@{@"expected": token, 
+                                                @"found": next ?: [NSNull null]}
+                ];;
     }
 }
 

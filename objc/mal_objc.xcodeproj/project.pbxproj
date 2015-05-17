@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		BA14D8881B092A1E0073D98B /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = BA14D8871B092A1E0073D98B /* main.m */; };
+		BA14D8891B092A1E0073D98B /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = BA14D8871B092A1E0073D98B /* main.m */; };
 		BA3931B81B08E6B400C690F2 /* step0_repl.m in Sources */ = {isa = PBXBuildFile; fileRef = BA3931B71B08E6B400C690F2 /* step0_repl.m */; };
 		BA3A5B321B0901CD0081CE50 /* step1_read_print.m in Sources */ = {isa = PBXBuildFile; fileRef = BA3A5B281B0901BF0081CE50 /* step1_read_print.m */; };
 		BA3A5B361B0902390081CE50 /* Tokenizer.m in Sources */ = {isa = PBXBuildFile; fileRef = BA3A5B341B0902350081CE50 /* Tokenizer.m */; };
@@ -37,6 +39,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		BA14D8871B092A1E0073D98B /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		BA3931AA1B08E55900C690F2 /* step0_repl */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = step0_repl; sourceTree = BUILT_PRODUCTS_DIR; };
 		BA3931B41B08E58B00C690F2 /* Makefile */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.make; path = Makefile; sourceTree = "<group>"; };
 		BA3931B71B08E6B400C690F2 /* step0_repl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = step0_repl.m; sourceTree = "<group>"; };
@@ -93,6 +96,7 @@
 		BA3931AC1B08E55900C690F2 /* mal-objc */ = {
 			isa = PBXGroup;
 			children = (
+				BA14D8871B092A1E0073D98B /* main.m */,
 				BA3931B71B08E6B400C690F2 /* step0_repl.m */,
 				BA3A5B281B0901BF0081CE50 /* step1_read_print.m */,
 				BA3A5B521B0911220081CE50 /* Helpers */,
@@ -198,6 +202,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BA14D8881B092A1E0073D98B /* main.m in Sources */,
 				BA3931B81B08E6B400C690F2 /* step0_repl.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -210,6 +215,7 @@
 				BA3A5B4A1B090AA10081CE50 /* Reader.m in Sources */,
 				BA3A5B4E1B0910090081CE50 /* Printer.m in Sources */,
 				BA3A5B321B0901CD0081CE50 /* step1_read_print.m in Sources */,
+				BA14D8891B092A1E0073D98B /* main.m in Sources */,
 				BA3A5B511B09111E0081CE50 /* NSArray+Functional.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
