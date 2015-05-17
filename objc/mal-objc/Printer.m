@@ -17,17 +17,33 @@
 
 @end
 
-@implementation NSNumber (Printer)
+@implementation NSNull (Printer)
 
 - (NSString *)print {
+    return @"nil";
+}
+
+@end
+
+@implementation NSNumber (Printer)
+
+- (NSNumberFormatter *)numberFormatter {    
     static dispatch_once_t onceToken;
     static NSNumberFormatter *numberFormatter;
     dispatch_once(&onceToken, ^{
         numberFormatter = [NSNumberFormatter new];
     });
-    NSAssert(numberFormatter, @"Couldn't create printer number formatter");
     
-    return [numberFormatter stringFromNumber:self];
+    NSAssert(numberFormatter, @"Couldn't create printer number formatter");    
+    return numberFormatter;
+}
+
+- (NSString *)print {
+    if (*[self objCType] == 'c') {
+        return [self boolValue]? @"true" : @"false";
+    }
+    
+    return [self.numberFormatter stringFromNumber:self];
 }
 
 @end

@@ -12,6 +12,9 @@
 - (NSString *)print;
 @end
 
+@interface NSNull(Printer) <Printable>
+@end
+
 @interface NSString(Printer) <Printable>
 @end
 

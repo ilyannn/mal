@@ -104,6 +104,19 @@ Token const Comma      = @",";
 
 - (id)read_atom {
     Token token = [self.tokenizer next];
+    
+    if ([token isEqual: @"nil"]) {
+        return [NSNull null];
+    } 
+    
+    if ([token isEqual:@"true"]) {
+        return [NSNumber numberWithBool:YES];
+    }
+    
+    if ([token isEqual:@"false"]) {
+        return [NSNumber numberWithBool:NO];
+    } 
+
     NSNumber *number = [self.numberFormatter numberFromString:token];
     return number?: token;
 }
