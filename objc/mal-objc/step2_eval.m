@@ -81,9 +81,7 @@ NSString *PRINT(id ast) {
         return [self eval_ast:ast];
     }
     
-    NSArray *evaluated = [ast arrayByMapping:^id(id sub) {
-        return [self eval_ast:sub];
-    }];
+    NSArray *evaluated = [self eval_ast:ast];
     
     Operation *op = [evaluated firstObject];
     if (![op isKindOfClass:[Operation class]]) {
