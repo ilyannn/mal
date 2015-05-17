@@ -12,6 +12,7 @@
 
 Token const RightParen = @")";
 Token const LeftParen  = @"(";
+Token const Comma      = @",";
 
 @interface Reader()
 @property Tokenizer *tokenizer;
@@ -33,8 +34,11 @@ Token const LeftParen  = @"(";
         static NSCharacterSet *delimiters;
         dispatch_once(&onceToken, ^{
             NSMutableCharacterSet *chars = [NSMutableCharacterSet whitespaceAndNewlineCharacterSet];
+            
             [chars addCharactersInString:RightParen];
             [chars addCharactersInString:LeftParen];
+            [chars addCharactersInString:Comma];
+            
             delimiters = [chars copy];
         });
         return delimiters;
@@ -82,7 +86,9 @@ Token const LeftParen  = @"(";
     NSMutableArray *elements = [NSMutableArray new];
     while([self.tokenizer.peek isNotEqualTo:RightParen]) {
         id element = [self read_form]; 
-        [elements addObject:element];
+        if ([element isNotEqualTo:Comma]) {
+        	[elements addObject:element];
+        }
     }
     
     [self consume:RightParen];
