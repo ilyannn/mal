@@ -1,4 +1,4 @@
-TARGETS=step0_repl
+TARGETS=step0_repl step1_read_print
 
 all: $(TARGETS)
 	xcodebuild -alltargets

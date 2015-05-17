@@ -12,6 +12,8 @@
 	<dict>
 		<key>662B103BEB869254DDB83B487F49DB429E946E61</key>
 		<string>https://github.com/ilyannn/mal</string>
+		<key>FC1810A6165BE51F2EC444747514CCA7D5E7FCE0</key>
+		<string>git.boloid.com:showjet/showjet-iphone.git</string>
 	</dict>
 	<key>IDESourceControlProjectPath</key>
 	<string>objc/mal_objc.xcodeproj/project.xcworkspace</string>
@@ -19,6 +21,8 @@
 	<dict>
 		<key>662B103BEB869254DDB83B487F49DB429E946E61</key>
 		<string>../../..</string>
+		<key>FC1810A6165BE51F2EC444747514CCA7D5E7FCE0</key>
+		<string>../../../../../Hyperboloid/showjet-iphone</string>
 	</dict>
 	<key>IDESourceControlProjectURL</key>
 	<string>https://github.com/ilyannn/mal</string>
@@ -35,6 +39,14 @@
 			<string>662B103BEB869254DDB83B487F49DB429E946E61</string>
 			<key>IDESourceControlWCCName</key>
 			<string>mal</string>
+		</dict>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>FC1810A6165BE51F2EC444747514CCA7D5E7FCE0</string>
+			<key>IDESourceControlWCCName</key>
+			<string>showjet-iphone</string>
 		</dict>
 	</array>
 </dict>
