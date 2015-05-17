@@ -17,6 +17,15 @@
 		BA14D8941B092D800073D98B /* NSArray+Functional.m in Sources */ = {isa = PBXBuildFile; fileRef = BA14D88B1B092D1B0073D98B /* NSArray+Functional.m */; };
 		BA14D89C1B092DC60073D98B /* step2_eval.m in Sources */ = {isa = PBXBuildFile; fileRef = BA14D89B1B092DC60073D98B /* step2_eval.m */; };
 		BA14D8A21B09321F0073D98B /* Operation.m in Sources */ = {isa = PBXBuildFile; fileRef = BA14D8A11B09321F0073D98B /* Operation.m */; };
+		BA14D8A51B0938190073D98B /* Environment.m in Sources */ = {isa = PBXBuildFile; fileRef = BA14D8A41B0938190073D98B /* Environment.m */; };
+		BA14D8A91B0938690073D98B /* Tokenizer.m in Sources */ = {isa = PBXBuildFile; fileRef = BA3A5B341B0902350081CE50 /* Tokenizer.m */; };
+		BA14D8AA1B0938690073D98B /* Reader.m in Sources */ = {isa = PBXBuildFile; fileRef = BA3A5B481B090A9A0081CE50 /* Reader.m */; };
+		BA14D8AB1B0938690073D98B /* Printer.m in Sources */ = {isa = PBXBuildFile; fileRef = BA3A5B4C1B0910040081CE50 /* Printer.m */; };
+		BA14D8AD1B0938690073D98B /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = BA14D8871B092A1E0073D98B /* main.m */; };
+		BA14D8AE1B0938690073D98B /* Environment.m in Sources */ = {isa = PBXBuildFile; fileRef = BA14D8A41B0938190073D98B /* Environment.m */; };
+		BA14D8AF1B0938690073D98B /* Operation.m in Sources */ = {isa = PBXBuildFile; fileRef = BA14D8A11B09321F0073D98B /* Operation.m */; };
+		BA14D8B01B0938690073D98B /* NSArray+Functional.m in Sources */ = {isa = PBXBuildFile; fileRef = BA14D88B1B092D1B0073D98B /* NSArray+Functional.m */; };
+		BA14D8B71B09387F0073D98B /* step3_env.m in Sources */ = {isa = PBXBuildFile; fileRef = BA14D8A61B0938620073D98B /* step3_env.m */; };
 		BA3931B81B08E6B400C690F2 /* step0_repl.m in Sources */ = {isa = PBXBuildFile; fileRef = BA3931B71B08E6B400C690F2 /* step0_repl.m */; };
 		BA3A5B321B0901CD0081CE50 /* step1_read_print.m in Sources */ = {isa = PBXBuildFile; fileRef = BA3A5B281B0901BF0081CE50 /* step1_read_print.m */; };
 		BA3A5B361B0902390081CE50 /* Tokenizer.m in Sources */ = {isa = PBXBuildFile; fileRef = BA3A5B341B0902350081CE50 /* Tokenizer.m */; };
@@ -26,6 +35,15 @@
 
 /* Begin PBXCopyFilesBuildPhase section */
 		BA14D8961B092D800073D98B /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = /usr/share/man/man1/;
+			dstSubfolderSpec = 0;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 1;
+		};
+		BA14D8B21B0938690073D98B /* CopyFiles */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
 			dstPath = /usr/share/man/man1/;
@@ -63,6 +81,10 @@
 		BA14D89D1B092E790073D98B /* REPL.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = REPL.h; sourceTree = "<group>"; };
 		BA14D8A01B09321F0073D98B /* Operation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Operation.h; sourceTree = "<group>"; };
 		BA14D8A11B09321F0073D98B /* Operation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Operation.m; sourceTree = "<group>"; };
+		BA14D8A31B0938190073D98B /* Environment.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Environment.h; sourceTree = "<group>"; };
+		BA14D8A41B0938190073D98B /* Environment.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Environment.m; sourceTree = "<group>"; };
+		BA14D8A61B0938620073D98B /* step3_env.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = step3_env.m; sourceTree = "<group>"; };
+		BA14D8B61B0938690073D98B /* step3_env */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = step3_env; sourceTree = BUILT_PRODUCTS_DIR; };
 		BA3931AA1B08E55900C690F2 /* step0_repl */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = step0_repl; sourceTree = BUILT_PRODUCTS_DIR; };
 		BA3931B41B08E58B00C690F2 /* Makefile */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.make; path = Makefile; sourceTree = "<group>"; };
 		BA3931B71B08E6B400C690F2 /* step0_repl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = step0_repl.m; sourceTree = "<group>"; };
@@ -79,6 +101,13 @@
 
 /* Begin PBXFrameworksBuildPhase section */
 		BA14D8951B092D800073D98B /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		BA14D8B11B0938690073D98B /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -118,6 +147,7 @@
 				BA3931AA1B08E55900C690F2 /* step0_repl */,
 				BA3A5B311B0901C40081CE50 /* step1_read_print */,
 				BA14D89A1B092D800073D98B /* step2_eval */,
+				BA14D8B61B0938690073D98B /* step3_env */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -130,6 +160,7 @@
 				BA3931B71B08E6B400C690F2 /* step0_repl.m */,
 				BA3A5B281B0901BF0081CE50 /* step1_read_print.m */,
 				BA14D89B1B092DC60073D98B /* step2_eval.m */,
+				BA14D8A61B0938620073D98B /* step3_env.m */,
 				BA3A5B521B0911220081CE50 /* Helpers */,
 				BA3A5B331B0902350081CE50 /* Tokenizer.h */,
 				BA3A5B341B0902350081CE50 /* Tokenizer.m */,
@@ -139,6 +170,8 @@
 				BA3A5B4C1B0910040081CE50 /* Printer.m */,
 				BA14D8A01B09321F0073D98B /* Operation.h */,
 				BA14D8A11B09321F0073D98B /* Operation.m */,
+				BA14D8A31B0938190073D98B /* Environment.h */,
+				BA14D8A41B0938190073D98B /* Environment.m */,
 			);
 			path = "mal-objc";
 			sourceTree = "<group>";
@@ -179,6 +212,23 @@
 			name = step2_eval;
 			productName = "mal-objc";
 			productReference = BA14D89A1B092D800073D98B /* step2_eval */;
+			productType = "com.apple.product-type.tool";
+		};
+		BA14D8A71B0938690073D98B /* step3_env */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = BA14D8B31B0938690073D98B /* Build configuration list for PBXNativeTarget "step3_env" */;
+			buildPhases = (
+				BA14D8A81B0938690073D98B /* Sources */,
+				BA14D8B11B0938690073D98B /* Frameworks */,
+				BA14D8B21B0938690073D98B /* CopyFiles */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = step3_env;
+			productName = "mal-objc";
+			productReference = BA14D8B61B0938690073D98B /* step3_env */;
 			productType = "com.apple.product-type.tool";
 		};
 		BA3931A91B08E55900C690F2 /* step0_repl */ = {
@@ -244,6 +294,7 @@
 				BA3931A91B08E55900C690F2 /* step0_repl */,
 				BA3A5B291B0901C40081CE50 /* step1_read_print */,
 				BA14D88D1B092D800073D98B /* step2_eval */,
+				BA14D8A71B0938690073D98B /* step3_env */,
 			);
 		};
 /* End PBXProject section */
@@ -258,8 +309,24 @@
 				BA14D8911B092D800073D98B /* Printer.m in Sources */,
 				BA14D89C1B092DC60073D98B /* step2_eval.m in Sources */,
 				BA14D8931B092D800073D98B /* main.m in Sources */,
+				BA14D8A51B0938190073D98B /* Environment.m in Sources */,
 				BA14D8A21B09321F0073D98B /* Operation.m in Sources */,
 				BA14D8941B092D800073D98B /* NSArray+Functional.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		BA14D8A81B0938690073D98B /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				BA14D8A91B0938690073D98B /* Tokenizer.m in Sources */,
+				BA14D8AA1B0938690073D98B /* Reader.m in Sources */,
+				BA14D8B71B09387F0073D98B /* step3_env.m in Sources */,
+				BA14D8AB1B0938690073D98B /* Printer.m in Sources */,
+				BA14D8AD1B0938690073D98B /* main.m in Sources */,
+				BA14D8AE1B0938690073D98B /* Environment.m in Sources */,
+				BA14D8AF1B0938690073D98B /* Operation.m in Sources */,
+				BA14D8B01B0938690073D98B /* NSArray+Functional.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -301,6 +368,22 @@
 			buildSettings = {
 				OTHER_LDFLAGS = "-lreadline";
 				PRODUCT_NAME = step2_eval;
+			};
+			name = Release;
+		};
+		BA14D8B41B0938690073D98B /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				OTHER_LDFLAGS = "-lreadline";
+				PRODUCT_NAME = step3_env;
+			};
+			name = Debug;
+		};
+		BA14D8B51B0938690073D98B /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				OTHER_LDFLAGS = "-lreadline";
+				PRODUCT_NAME = step3_env;
 			};
 			name = Release;
 		};
@@ -421,6 +504,15 @@
 			buildConfigurations = (
 				BA14D8981B092D800073D98B /* Debug */,
 				BA14D8991B092D800073D98B /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		BA14D8B31B0938690073D98B /* Build configuration list for PBXNativeTarget "step3_env" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				BA14D8B41B0938690073D98B /* Debug */,
+				BA14D8B51B0938690073D98B /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

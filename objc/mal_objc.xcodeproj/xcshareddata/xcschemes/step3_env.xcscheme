@@ -14,9 +14,9 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "BA14D88D1B092D800073D98B"
-               BuildableName = "step2_eval"
-               BlueprintName = "step2_eval"
+               BlueprintIdentifier = "BA14D8A71B0938690073D98B"
+               BuildableName = "step3_env"
+               BlueprintName = "step3_env"
                ReferencedContainer = "container:mal_objc.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -32,9 +32,9 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "BA14D88D1B092D800073D98B"
-            BuildableName = "step2_eval"
-            BlueprintName = "step2_eval"
+            BlueprintIdentifier = "BA14D8A71B0938690073D98B"
+            BuildableName = "step3_env"
+            BlueprintName = "step3_env"
             ReferencedContainer = "container:mal_objc.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
@@ -52,9 +52,9 @@
          runnableDebuggingMode = "0">
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "BA14D88D1B092D800073D98B"
-            BuildableName = "step2_eval"
-            BlueprintName = "step2_eval"
+            BlueprintIdentifier = "BA14D8A71B0938690073D98B"
+            BuildableName = "step3_env"
+            BlueprintName = "step3_env"
             ReferencedContainer = "container:mal_objc.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
@@ -71,9 +71,9 @@
          runnableDebuggingMode = "0">
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "BA14D88D1B092D800073D98B"
-            BuildableName = "step2_eval"
-            BlueprintName = "step2_eval"
+            BlueprintIdentifier = "BA14D8A71B0938690073D98B"
+            BuildableName = "step3_env"
+            BlueprintName = "step3_env"
             ReferencedContainer = "container:mal_objc.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
