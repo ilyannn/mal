@@ -40,7 +40,8 @@
              @"*": @"multiply:with:",
              @"/": @"divide:by:", 
              @"=": @"equals:",
-             @"slurp": @"slurp:"
+             @"slurp": @"slurp:",
+             @"read-string": @"readString:",
              };
 }
 
@@ -173,6 +174,11 @@
     }
     
     return str;
+}
+
+- (id)readString:(id)args {
+    RequireElement(0, args, [NSString class]);                   
+    return READ([args firstObject]);
 }
 
 @end

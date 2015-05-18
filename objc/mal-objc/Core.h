@@ -8,6 +8,8 @@
 
 #import <Foundation/Foundation.h>
 
+extern id READ(NSString *line);
+
 @interface Core : NSObject
  /**
  *  Array of Symbol
