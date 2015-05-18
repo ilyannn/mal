@@ -8,30 +8,30 @@
 
 #import <Foundation/Foundation.h>
 
-@protocol MALType <NSObject, NSCopying>
+@protocol Type <NSObject, NSCopying>
 - (NSString *)print;
 - (BOOL)truthValue;
 @end
 
-@interface NSString(MALType) <MALType>
+@interface NSString(Type) <Type>
 @end
 
-@interface NSNull(MALType) <MALType>
+@interface NSNull(Type) <Type>
 @end
 
-@interface NSNumber(MALType) <MALType>
+@interface NSNumber(Type) <Type>
 @end
 
-@interface NSArray(MALType) <MALType>
+@interface NSArray(Type) <Type>
 @end
 
-@interface Symbol: NSObject <MALType>
+@interface Symbol: NSObject <Type>
 + (instancetype)symbolWithName:(NSString *)name;
 - (instancetype)initWithName:(NSString *)name;
 @property (readonly) NSString *name;
 @end
 
-@interface Truth: NSObject <MALType>
+@interface Truth: NSObject <Type>
 - (instancetype)initWithTruth:(BOOL)truth;
 @property (readonly) BOOL truth;
 @end

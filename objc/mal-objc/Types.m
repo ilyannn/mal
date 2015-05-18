@@ -9,7 +9,7 @@
 #import "Types.h"
 #import "NSArray+Functional.h"
 
-@implementation NSString (MALType)
+@implementation NSString (Type)
 
 - (BOOL)truthValue {
     return true;

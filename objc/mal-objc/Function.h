@@ -13,7 +13,7 @@ void Require(BOOL condition, NSString *explanation, id args);
 void RequireList(id args);
 id RequireElement(NSUInteger index, NSArray *args, Class type);
 
-@interface Function : NSObject <MALType>
+@interface Function : NSObject <Type>
 
 @property (strong) id(^body)(id);
 
