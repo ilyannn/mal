@@ -8,7 +8,6 @@
 
 #import "Reader.h"
 
-#import "StringConsumer.h"
 #import "Tokenizer.h"
 #import "Types.h"
 
@@ -116,16 +115,12 @@ Token const Comma      = @",";
 }
 
 - (id)read_atom {
-    if (self.tokenizer.currentCharacter == '"') {
-        StringConsumer *consumer = [StringConsumer new];
-        [self.tokenizer consumeCharactersWithConsumer:consumer];
-        return consumer.result;
-    }
     
-    Token token = [self.tokenizer peek];
+    Token token = [self.tokenizer next];
     
-    if ([token isEqual: @"nil"]) {
-        return [NSNull null];
+    if ([token characterAtIndex:0] == '"') {
+        NSRange range = NSMakeRange(1, token.length - 2);
+        return [token substringWithRange:range];
     } 
     
     if ([token isEqual:@"true"]) {

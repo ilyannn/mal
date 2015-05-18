@@ -11,9 +11,9 @@
 @interface StringConsumer () {
     NSMutableString *_result;
 }
-@property (getter=areAtStart) BOOL atStart;
-@property (getter=areAtEnd) BOOL atEnd;
-@property (getter=areInSpecial) BOOL inSpecial;
+@property BOOL atStart;
+@property BOOL atEnd;
+@property BOOL inSpecial;
 @end
 
 @implementation StringConsumer
@@ -27,6 +27,7 @@
     if (self = [super init]) {
         _result = [NSMutableString new];
         _atStart = YES;
+        _atEnd = NO;
         _inSpecial = NO;
     }
     return self;
@@ -34,12 +35,8 @@
 
 - (BOOL)continueConsumingAt:(unichar)ch {
     unichar chstr[2];
+    chstr[0] = ch;
     chstr[1] = 0;
-    
-    if (self.atStart) {
-        self.atStart = NO;
-        return YES;    
-    }
     
     if (self.atEnd) {
         return NO;
@@ -58,19 +55,19 @@
     } else {
         
         switch (ch) {
-            case '"':
-                self.atEnd = YES;
-                return YES;
-                
             case '\\':
                 self.inSpecial = YES;
-                // fallthrough
-                
-            default:    
-                chstr[0] = ch;
+                return YES;
+
+            case '"':
+                if (!self.atStart) {
+                	self.atEnd = YES;
+                }
         }
     }
     
+    self.atStart = NO;
+
     [_result appendString:[NSString stringWithCharacters:chstr length:1]];
     return YES;
 }
