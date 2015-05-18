@@ -68,8 +68,9 @@
     
     [self consumeCharactersWithConsumer:self];    
 
-    if (self.currentCharacter == ';') {
+    while (self.currentCharacter == ';') {
         [self consumeCharactersWithConsumer:[EndLineConsumer new]];
+        [self consumeCharactersWithConsumer:self];    
     }
 
     if (self.currentCharacter == '"') {
