@@ -64,3 +64,17 @@ id RequireElement(NSUInteger index, NSArray *args, Class type) {
 }
 
 @end
+
+
+@implementation DefinedFunction
+
+- (instancetype)initWithBody:(id (^)(id))body params:(NSArray *)params env:(Environment *)env ast:(id)ast {
+    if (self = [super initWithBody:body]) {
+        _params = params;
+        _env = env;
+        _ast = ast;
+    }
+    return self;
+}
+
+@end

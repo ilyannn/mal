@@ -18,10 +18,17 @@ id RequireElement(NSUInteger index, NSArray *args, Class type);
 @property (strong) id(^body)(id);
 
 + (instancetype)operationWithIntegers:(NSInteger(^)(NSInteger, NSInteger))body;
-
 - (instancetype)initWithBody:(id(^)(id))body;
-
 - (id)evaluateWithArguments:(id)arguments;
 
 @end
 
+@class Environment;
+
+@interface DefinedFunction: Function
+- (instancetype)initWithBody:(id(^)(id))body params:(NSArray *)params env:(Environment *)env ast:(id)ast NS_DESIGNATED_INITIALIZER;
+
+@property (readonly) id ast;
+@property (readonly) NSArray *params;
+@property (readonly) Environment *env;
+@end

@@ -120,28 +120,41 @@ NSString *PRINT(id ast) {
                     id binds = ast[1];
                     id expr = ast[2];
                     
-                    return [[Function alloc] initWithBody:^id(id args) {
+                    return [[DefinedFunction alloc] initWithBody:^id(id args) {
                         Environment *child = [[Environment alloc] initWithOuter:env 
                                                                           binds:binds 
                                                                           exprs:args];
                         return [wself eval:expr env:child];
                         
-                    }];            
+                    } params:binds env:env ast:expr];            
                 }
             }
             
         }
-        NSArray *evaluated = [self eval_ast:ast env:env];
         
-        Function *op = [evaluated firstObject];
-        if (![op isKindOfClass:[Function class]]) {
-            @throw [NSException exceptionWithName:@"FunctionRequired" 
-                                           reason:@"Symbol that is a known function must be the first in a list" 
-                                         userInfo:nil];
+        NSArray *evaluated = [self eval_ast:ast env:env];
+        NSRange range = NSMakeRange(1, evaluated.count - 1);
+
+        id head = [evaluated firstObject]; 
+        NSArray *tail = [evaluated subarrayWithRange:range];
+        
+        if ([head isKindOfClass:[DefinedFunction class]]) {
+            DefinedFunction *def = head;
+            ast = def.ast;
+            env  = [[Environment alloc] initWithOuter:def.env 
+                                                binds:def.params 
+                                                exprs:tail];
+            continue; // tco
         }
         
-        NSRange range = NSMakeRange(1, evaluated.count - 1);
-        return [op evaluateWithArguments:[evaluated subarrayWithRange:range]];
+        if ([head isKindOfClass:[Function class]]) {
+            Function *fun = head;
+            return [fun evaluateWithArguments:tail];
+        }
+        
+        @throw [NSException exceptionWithName:@"FunctionRequired" 
+                                       reason:@"Symbol that is a known function must be the first in a list" 
+                                     userInfo:nil];
     }
 }
 

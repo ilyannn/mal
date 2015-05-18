@@ -97,6 +97,10 @@
     return self.name;
 }
 
+- (NSString *)description {
+    return [NSString stringWithFormat:@"(symbol)%@", self.name];
+}
+
 - (NSUInteger)hash {
     return [self.name hash];
 }
@@ -127,6 +131,10 @@
 
 - (NSString *)print {
     return self.truthValue? @"true" : @"false";
+}
+
+- (NSString *)description {
+    return [self print];
 }
 
 - (NSUInteger)hash {
