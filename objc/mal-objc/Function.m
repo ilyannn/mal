@@ -59,4 +59,8 @@ id RequireElement(NSUInteger index, NSArray *args, Class type) {
     return true;
 }
 
+- (id)copyWithZone:(NSZone *)zone {
+    return [[[self class] allocWithZone:zone] initWithBody:self.body];
+}
+
 @end
