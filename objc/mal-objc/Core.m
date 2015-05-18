@@ -42,6 +42,10 @@
              @"=": @"equals:",
              @"slurp": @"slurp:",
              @"read-string": @"readString:",
+             @"pr-str":@"pr_str:",
+             @"str":@"str:",
+             @"prn":@"prn:",
+             @"println":@"println:",
              };
 }
 
@@ -180,5 +184,35 @@
     RequireElement(0, args, [NSString class]);                   
     return READ([args firstObject]);
 }
+
+- (NSString *)printArgs:(id)args sep:(NSString *)sep readably:(BOOL)readably {
+    NSArray *printed = [args arrayByMapping:^id(id sub) {
+        return [sub printReadably:readably];
+    }];
+    return [printed componentsJoinedByString:sep];
+}
+
+- (NSString *)pr_str:(id)args {
+    return [self printArgs:args sep:@" " readably:YES];
+}
+
+- (NSString *)str:(id)args {
+    return [self printArgs:args sep:@"" readably:NO];
+}
+
+- (void)outputString:(NSString *)string {
+    printf("%s", [string UTF8String]);
+}
+
+- (NSNull *)prn:(id)args {
+    [self outputString:[self printArgs:args sep:@" " readably:YES]];
+    return [NSNull null];
+}
+
+- (NSNull *)println:(id)args {
+    [self outputString:[self printArgs:args sep:@" " readably:NO]];
+    return [NSNull null];
+}
+
 
 @end
