@@ -34,6 +34,10 @@
 		BA14D8C91B0942EC0073D98B /* step4_if_fn_do.m in Sources */ = {isa = PBXBuildFile; fileRef = BA14D8C81B0942EC0073D98B /* step4_if_fn_do.m */; };
 		BA14D8CA1B09430B0073D98B /* step3_env.m in Sources */ = {isa = PBXBuildFile; fileRef = BA14D8A61B0938620073D98B /* step3_env.m */; };
 		BA14D8CD1B094D320073D98B /* Core.m in Sources */ = {isa = PBXBuildFile; fileRef = BA14D8CC1B094D320073D98B /* Core.m */; };
+		BA14D8D01B095EE90073D98B /* Types.m in Sources */ = {isa = PBXBuildFile; fileRef = BA14D8CF1B095EE90073D98B /* Types.m */; };
+		BA14D8D11B0961270073D98B /* Types.m in Sources */ = {isa = PBXBuildFile; fileRef = BA14D8CF1B095EE90073D98B /* Types.m */; };
+		BA14D8D21B0961280073D98B /* Types.m in Sources */ = {isa = PBXBuildFile; fileRef = BA14D8CF1B095EE90073D98B /* Types.m */; };
+		BA14D8D31B0961280073D98B /* Types.m in Sources */ = {isa = PBXBuildFile; fileRef = BA14D8CF1B095EE90073D98B /* Types.m */; };
 		BA3931B81B08E6B400C690F2 /* step0_repl.m in Sources */ = {isa = PBXBuildFile; fileRef = BA3931B71B08E6B400C690F2 /* step0_repl.m */; };
 		BA3A5B321B0901CD0081CE50 /* step1_read_print.m in Sources */ = {isa = PBXBuildFile; fileRef = BA3A5B281B0901BF0081CE50 /* step1_read_print.m */; };
 		BA3A5B361B0902390081CE50 /* Tokenizer.m in Sources */ = {isa = PBXBuildFile; fileRef = BA3A5B341B0902350081CE50 /* Tokenizer.m */; };
@@ -106,6 +110,8 @@
 		BA14D8C81B0942EC0073D98B /* step4_if_fn_do.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = step4_if_fn_do.m; sourceTree = "<group>"; };
 		BA14D8CB1B094D320073D98B /* Core.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Core.h; sourceTree = "<group>"; };
 		BA14D8CC1B094D320073D98B /* Core.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Core.m; sourceTree = "<group>"; };
+		BA14D8CE1B095EE90073D98B /* Types.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Types.h; sourceTree = "<group>"; };
+		BA14D8CF1B095EE90073D98B /* Types.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Types.m; sourceTree = "<group>"; };
 		BA3931AA1B08E55900C690F2 /* step0_repl */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = step0_repl; sourceTree = BUILT_PRODUCTS_DIR; };
 		BA3931B41B08E58B00C690F2 /* Makefile */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.make; path = Makefile; sourceTree = "<group>"; };
 		BA3931B71B08E6B400C690F2 /* step0_repl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = step0_repl.m; sourceTree = "<group>"; };
@@ -204,6 +210,8 @@
 				BA14D8A41B0938190073D98B /* Environment.m */,
 				BA14D8CB1B094D320073D98B /* Core.h */,
 				BA14D8CC1B094D320073D98B /* Core.m */,
+				BA14D8CE1B095EE90073D98B /* Types.h */,
+				BA14D8CF1B095EE90073D98B /* Types.m */,
 			);
 			path = "mal-objc";
 			sourceTree = "<group>";
@@ -361,6 +369,7 @@
 				BA14D8931B092D800073D98B /* main.m in Sources */,
 				BA14D8A21B09321F0073D98B /* Function.m in Sources */,
 				BA14D8941B092D800073D98B /* NSArray+Functional.m in Sources */,
+				BA14D8D31B0961280073D98B /* Types.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -374,6 +383,7 @@
 				BA14D8AD1B0938690073D98B /* main.m in Sources */,
 				BA14D8AE1B0938690073D98B /* Environment.m in Sources */,
 				BA14D8CA1B09430B0073D98B /* step3_env.m in Sources */,
+				BA14D8D11B0961270073D98B /* Types.m in Sources */,
 				BA14D8AF1B0938690073D98B /* Function.m in Sources */,
 				BA14D8B01B0938690073D98B /* NSArray+Functional.m in Sources */,
 			);
@@ -384,6 +394,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				BA14D8BA1B0942C50073D98B /* Tokenizer.m in Sources */,
+				BA14D8D01B095EE90073D98B /* Types.m in Sources */,
 				BA14D8BB1B0942C50073D98B /* Reader.m in Sources */,
 				BA14D8BD1B0942C50073D98B /* Printer.m in Sources */,
 				BA14D8BE1B0942C50073D98B /* main.m in Sources */,
@@ -413,6 +424,7 @@
 				BA3A5B4E1B0910090081CE50 /* Printer.m in Sources */,
 				BA3A5B321B0901CD0081CE50 /* step1_read_print.m in Sources */,
 				BA14D8891B092A1E0073D98B /* main.m in Sources */,
+				BA14D8D21B0961280073D98B /* Types.m in Sources */,
 				BA14D88C1B092D1B0073D98B /* NSArray+Functional.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

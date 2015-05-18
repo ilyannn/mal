@@ -8,6 +8,8 @@
 
 #import <Foundation/Foundation.h>
 
+@class Symbol;
+
 @interface Environment : NSObject
 @property (readonly) Environment *outer; 
 
@@ -15,8 +17,8 @@
 - (instancetype)initWithOuter:(Environment *)outer;
 - (instancetype)initWithOuter:(Environment *)outer binds:(NSArray *)binds exprs:(NSArray *)exprs NS_DESIGNATED_INITIALIZER;
 
-- (void)set:(id)anObject forSymbol:(NSString *)symbol;
-- (Environment *)findEnvironmentForSymbol:(NSString *)symbol;
-- (id)getObjectForSymbol:(NSString *)symbol;
+- (void)set:(id)anObject forSymbol:(Symbol *)symbol;
+- (Environment *)findEnvironmentForSymbol:(Symbol *)symbol;
+- (id)getObjectForSymbol:(Symbol *)symbol;
 
 @end

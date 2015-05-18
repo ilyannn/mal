@@ -8,22 +8,6 @@
 
 #import <Foundation/Foundation.h>
 
-@protocol Printable <NSObject>
-- (NSString *)print;
-@end
-
-@interface NSNull(Printer) <Printable>
-@end
-
-@interface NSString(Printer) <Printable>
-@end
-
-@interface NSNumber(Printer) <Printable>
-@end
-
-@interface NSArray(Printer) <Printable>
-@end
-
 @interface Printer : NSObject
 - (NSString *)print:(id)object;
 @end

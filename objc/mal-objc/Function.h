@@ -7,13 +7,13 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "Printer.h"
+#import "Types.h"
 
 void Require(BOOL condition, NSString *explanation, id args);
 void RequireList(id args);
 id RequireElement(NSUInteger index, NSArray *args, Class type);
 
-@interface Function : NSObject
+@interface Function : NSObject <MALType>
 
 @property (strong) id(^body)(id);
 
@@ -25,5 +25,3 @@ id RequireElement(NSUInteger index, NSArray *args, Class type);
 
 @end
 
-@interface Function(Printer) <Printable>
-@end

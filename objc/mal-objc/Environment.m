@@ -8,6 +8,8 @@
 
 #import "Environment.h"
 
+#import "Types.h"
+
 @interface Environment ()
 @property (readonly) NSMutableDictionary *data;
 @end
@@ -31,18 +33,18 @@
     
 }
 
-- (void)set:(id)anObject forSymbol:(NSString *)symbol {
+- (void)set:(id)anObject forSymbol:(Symbol *)symbol {
     self.data[symbol] = anObject;
 }
 
-- (Environment *)findEnvironmentForSymbol:(NSString *)symbol {
+- (Environment *)findEnvironmentForSymbol:(Symbol *)symbol {
     if ([self.data objectForKey:symbol] != nil) {
         return self;
     }
     return self.outer;
 }
 
-- (id)getObjectForSymbol:(NSString *)symbol {
+- (id)getObjectForSymbol:(Symbol *)symbol {
     Environment *env = [self findEnvironmentForSymbol:symbol];
     
     if (env == nil) {

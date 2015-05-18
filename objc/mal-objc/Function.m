@@ -51,12 +51,12 @@ id RequireElement(NSUInteger index, NSArray *args, Class type) {
     return self.body(arguments);
 }
 
-@end
-
-@implementation Function (Printer)
-
 - (NSString *)print {
     return @"#<function>";
+}
+
+- (BOOL)truthValue {
+    return true;
 }
 
 @end

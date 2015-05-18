@@ -9,6 +9,9 @@
 #import <Foundation/Foundation.h>
 
 @interface Core : NSObject
+ /**
+ *  Array of Symbol
+ */
 @property (readonly) NSArray *bindings;
 @property (readonly) NSArray *operations;
 @end

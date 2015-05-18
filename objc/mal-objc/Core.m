@@ -15,7 +15,10 @@
 
 - (instancetype)init {
     if (self = [super init]) {
-        _bindings = [[self selectorDict] allKeys]; // fix order
+        _bindings = [[[self selectorDict] allKeys] // fix order
+                     arrayByMapping:^id(NSString *key) {
+                         return [Symbol symbolWithName:key];
+                     }];
     }
     return self;
 }
@@ -98,8 +101,8 @@
 }
 
 - (NSArray *)operations {
-    return [[self bindings] arrayByMapping:^id(NSString *name) {        
-        SEL sel = NSSelectorFromString([self selectorDict][name]);
+    return [[self bindings] arrayByMapping:^id(Symbol *sym) {        
+        SEL sel = NSSelectorFromString([self selectorDict][sym.name]);
         NSMethodSignature *sign = [self methodSignatureForSelector:sel];
 	
         BOOL numberOp = sign.numberOfArguments == 4;

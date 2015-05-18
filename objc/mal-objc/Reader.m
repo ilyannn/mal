@@ -9,6 +9,7 @@
 #import "Reader.h"
 
 #import "Tokenizer.h"
+#import "Types.h"
 
 Token const RightParen = @")]";
 Token const LeftParen  = @"([";
@@ -122,15 +123,23 @@ Token const Comma      = @",";
     } 
     
     if ([token isEqual:@"true"]) {
-        return [NSNumber numberWithBool:YES];
+        return [[Truth alloc] initWithTruth:YES];
     }
     
     if ([token isEqual:@"false"]) {
-        return [NSNumber numberWithBool:NO];
+        return [[Truth alloc] initWithTruth:NO];
     } 
+    
+    if ([token characterAtIndex:0] == '"') {
+        NSRange range = NSMakeRange(1, token.length - 2);
+        return [[[token substringWithRange:range] 
+                 stringByReplacingOccurrencesOfString:@"\"" withString:@""""]
+        		 stringByReplacingOccurrencesOfString:@"\\\\" withString:@"\\"];
+         
+    }
 
     NSNumber *number = [self.numberFormatter numberFromString:token];
-    return number?: token;
+    return number ?: [[Symbol alloc] initWithName:token];    
 }
 
 @end
