@@ -10,6 +10,10 @@
 
 typedef NSString * Token;
 
+@protocol CharacterConsuming <NSObject>
+- (BOOL)continueConsumingAt:(unichar)ch;
+@end
+
 /**
  Splits a string into tokens.
  
@@ -21,6 +25,10 @@ typedef NSString * Token;
 - (instancetype)initWithString:(NSString *)string 
                     delimiters:(NSCharacterSet *)delimiterSet;
 
+@property (readonly, nonatomic) unichar currentCharacter;
+- (void)consumeCharactersWithConsumer:(id <CharacterConsuming>)consumer;
+
 @property (readonly, nonatomic) Token peek;
 - (Token)next;
 @end
+

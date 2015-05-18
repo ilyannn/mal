@@ -8,6 +8,7 @@
 
 #import "Reader.h"
 
+#import "StringConsumer.h"
 #import "Tokenizer.h"
 #import "Types.h"
 
@@ -114,9 +115,14 @@ Token const Comma      = @",";
     return [elements copy];
 }
 
-
 - (id)read_atom {
-    Token token = [self.tokenizer next];
+    if (self.tokenizer.currentCharacter == '"') {
+        StringConsumer *consumer = [StringConsumer new];
+        [self.tokenizer consumeCharactersWithConsumer:consumer];
+        return consumer.result;
+    }
+    
+    Token token = [self.tokenizer peek];
     
     if ([token isEqual: @"nil"]) {
         return [NSNull null];
@@ -130,16 +136,6 @@ Token const Comma      = @",";
         return [[Truth alloc] initWithTruth:NO];
     } 
     
-    if ([token characterAtIndex:0] == '"') {
-        NSRange range = NSMakeRange(1, token.length - 2);
-        return [[[[token substringWithRange:range] 
-                 stringByReplacingOccurrencesOfString:@"\\\"" withString:@"\""]
-                 stringByReplacingOccurrencesOfString:@"\\n" withString:@"\n"]
-        		 stringByReplacingOccurrencesOfString:@"\\\\" withString:@"\\"]
-        ;
-         
-    }
-
     NSNumber *number = [self.numberFormatter numberFromString:token];
     return number ?: [[Symbol alloc] initWithName:token];    
 }

@@ -9,7 +9,7 @@
 #import "Tokenizer.h"
 
 
-@interface Tokenizer()
+@interface Tokenizer() <CharacterConsuming>
 @property (readonly, copy) NSScanner *scanner;
 @property (readwrite) Token peek;
 @property (readonly) NSCharacterSet *rightDelimiters;
@@ -40,18 +40,33 @@
     return _peek;
 }
 
-- (Token)scan {
-    NSString *read;
-    NSUInteger max = [self.scanner.string length];
-    
+- (unichar)currentCharacter {
+    if ([self.scanner isAtEnd]) {
+        return 0;
+    }
+    return [self.scanner.string characterAtIndex:self.scanner.scanLocation];
+}
+
+- (void)consumeCharactersWithConsumer:(id<CharacterConsuming>)consumer {    
     // Skip manually.
-    for (; self.scanner.scanLocation < max; self.scanner.scanLocation ++) {
-        if (![self.scanner.charactersToBeSkipped characterIsMember:
-              [self.scanner.string characterAtIndex:self.scanner.scanLocation]]) {
+    for (; !self.scanner.atEnd; self.scanner.scanLocation ++) {
+        if (![consumer continueConsumingAt:self.currentCharacter]) {
             break;
         }
     }
-        
+}
+
+ /**
+ *  Manually skip whitespace.
+ */
+- (BOOL)continueConsumingAt:(unichar)ch {
+    return [self.scanner.charactersToBeSkipped characterIsMember:ch];
+}
+
+- (Token)scan {
+    NSString *read;
+    
+    [self consumeCharactersWithConsumer:self];    
     [self.scanner scanUpToCharactersFromSet:self.rightDelimiters intoString: &read];
     
     if ([read length]) {
