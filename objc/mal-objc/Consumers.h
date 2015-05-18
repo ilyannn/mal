@@ -12,3 +12,6 @@
 @interface StringConsumer : NSObject <CharacterConsuming>
 @property (readonly) NSString *result;
 @end
+
+@interface EndLineConsumer : NSObject <CharacterConsuming>
+@end

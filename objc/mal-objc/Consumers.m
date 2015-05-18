@@ -6,7 +6,33 @@
 //  Copyright (c) 2015 ilyan. All rights reserved.
 //
 
-#import "StringConsumer.h"
+#import "Consumers.h"
+
+@interface EndLineConsumer ()
+@property BOOL atEnd;
+@end
+
+@implementation EndLineConsumer
+
+- (instancetype)init
+{
+    self = [super init];
+    if (self) {
+        _atEnd = NO;
+    }
+    return self;
+}
+
+- (BOOL)continueConsumingAt:(unichar)ch {
+    if (self.atEnd) {
+        return NO;
+    }
+    
+    self.atEnd = ch == '\n';
+    return YES;
+}
+
+@end
 
 @interface StringConsumer () {
     NSMutableString *_result;

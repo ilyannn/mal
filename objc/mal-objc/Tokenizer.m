@@ -7,7 +7,7 @@
 //
 
 #import "Tokenizer.h"
-#import "StringConsumer.h"
+#import "Consumers.h"
 
 @interface Tokenizer() <CharacterConsuming>
 @property (readonly, copy) NSScanner *scanner;
@@ -67,6 +67,10 @@
     NSString *read;
     
     [self consumeCharactersWithConsumer:self];    
+
+    if (self.currentCharacter == ';') {
+        [self consumeCharactersWithConsumer:[EndLineConsumer new]];
+    }
 
     if (self.currentCharacter == '"') {
         StringConsumer *consumer = [StringConsumer new];
