@@ -16,10 +16,16 @@
 }
 
 - (NSString *)print {
-    NSString *expanded = [[self stringByReplacingOccurrencesOfString:@"\\" 
-                                                         withString:@"\\\\"]
-						       stringByReplacingOccurrencesOfString:@"\"" 
-                                                         withString:@"\\\""];
+    return [self printReadably:NO];
+}
+
+- (NSString *)printReadably:(BOOL)print_readably {
+    NSString *expanded = print_readably ? [[[self 
+                                             stringByReplacingOccurrencesOfString:@"\\" withString:@"\\\\"]
+                                            stringByReplacingOccurrencesOfString:@"\"" withString:@"\\\""]                           
+                                           stringByReplacingOccurrencesOfString:@"\n" withString:@"\\n"] 
+    : self;
+    
     return [NSString stringWithFormat:@"\"%@\"", expanded];
 }
 
@@ -64,8 +70,16 @@
 @implementation NSArray (Printer)
 
 - (NSString *)print {
+    return [self printReadably:NO];
+}
+
+- (NSString *)printReadably:(BOOL)print_readably {
     return [NSString stringWithFormat:@"(%@)", [[self arrayByMapping:^id(id object) {
-        return [object print];
+        if (print_readably && [object respondsToSelector:@selector(printReadably:)]) {
+            return [object printReadably: YES];
+        } else {
+            return [object print];
+        }
     }] componentsJoinedByString:@" "]];
 }
 

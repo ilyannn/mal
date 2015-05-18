@@ -11,6 +11,8 @@
 @protocol Type <NSObject, NSCopying>
 - (NSString *)print;
 - (BOOL)truthValue;
+@optional 
+- (NSString *)printReadably:(BOOL)print_readably;
 @end
 
 @interface NSString(Type) <Type>

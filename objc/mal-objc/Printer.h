@@ -10,4 +10,5 @@
 
 @interface Printer : NSObject
 - (NSString *)print:(id)object;
+- (NSString *)print:(id)object readably:(BOOL)print_readably;
 @end

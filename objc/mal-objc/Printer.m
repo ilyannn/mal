@@ -15,4 +15,12 @@
     return [object print];
 }
 
+- (NSString *)print:(id)object readably:(BOOL)print_readably {
+    if (print_readably && [object respondsToSelector:@selector(printReadably:)]) {
+        return [object printReadably: YES];
+    } else {
+        return [object print];
+    }
+}
+
 @end
