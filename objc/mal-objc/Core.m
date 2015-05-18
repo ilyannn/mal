@@ -23,7 +23,7 @@
     return self;
 }
 
-- (id)count:(id)args {
+- (NSNumber *)count:(NSArray *)args {
     id first = [args firstObject];
     if ([first isEqualTo:[NSNull null]]) {
         return 0;
@@ -31,24 +31,24 @@
     return @([first count]);
 }
 
-- (id)list:(id)args {
+- (NSArray *)list:(NSArray *)args {
     return args;
 }
 
-- (id)listQ:(id)args {
+- (Truth *)listQ:(id)args {
     id first = [args firstObject];
-    return [NSNumber numberWithBool:[first isKindOfClass:[NSArray class]]];
+    return [[Truth alloc] initWithTruth:[first isKindOfClass:[NSArray class]]];
 }
 
-- (id)emptyQ:(id)args {
+- (Truth *)emptyQ:(id)args {
     id first = [args firstObject];
-    return [NSNumber numberWithBool:[first count] != 0];
+    return [[Truth alloc] initWithTruth: [first count] != 0];
 }
 
-- (id)equals:(id)args {
+- (Truth *)equals:(id)args {
     id first = args[0];
     id second = args[1];
-    return [NSNumber numberWithBool:[first isEqualTo:second]];
+    return [[Truth alloc] initWithTruth: [first isEqualTo:second]];
 }
 
 - (NSInteger)add:(NSInteger)first to:(NSInteger)second {
@@ -137,7 +137,7 @@
             } else {
                 BOOL retval;
                 [inv getReturnValue:&retval];
-                return [NSNumber numberWithBool:retval];
+                return [[Truth alloc] initWithTruth:retval];
             }
         }];
     }];

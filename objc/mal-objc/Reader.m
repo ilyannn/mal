@@ -133,7 +133,7 @@ Token const Comma      = @",";
     if ([token characterAtIndex:0] == '"') {
         NSRange range = NSMakeRange(1, token.length - 2);
         return [[[token substringWithRange:range] 
-                 stringByReplacingOccurrencesOfString:@"\"" withString:@""""]
+                 stringByReplacingOccurrencesOfString:@"\\\"" withString:@"\""]
         		 stringByReplacingOccurrencesOfString:@"\\\\" withString:@"\\"];
          
     }

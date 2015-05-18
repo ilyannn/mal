@@ -16,7 +16,11 @@
 }
 
 - (NSString *)print {
-    return [NSString stringWithFormat:@"""%@""", self];
+    NSString *expanded = [[self stringByReplacingOccurrencesOfString:@"\\" 
+                                                         withString:@"\\\\"]
+						       stringByReplacingOccurrencesOfString:@"\"" 
+                                                         withString:@"\\\""];
+    return [NSString stringWithFormat:@"\"%@\"", expanded];
 }
 
 @end
