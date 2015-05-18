@@ -7,6 +7,16 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		BA084AE51B0A4E75008F471C /* Tokenizer.m in Sources */ = {isa = PBXBuildFile; fileRef = BA3A5B341B0902350081CE50 /* Tokenizer.m */; };
+		BA084AE61B0A4E75008F471C /* Types.m in Sources */ = {isa = PBXBuildFile; fileRef = BA14D8CF1B095EE90073D98B /* Types.m */; };
+		BA084AE71B0A4E75008F471C /* Reader.m in Sources */ = {isa = PBXBuildFile; fileRef = BA3A5B481B090A9A0081CE50 /* Reader.m */; };
+		BA084AE81B0A4E75008F471C /* Printer.m in Sources */ = {isa = PBXBuildFile; fileRef = BA3A5B4C1B0910040081CE50 /* Printer.m */; };
+		BA084AE91B0A4E75008F471C /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = BA14D8871B092A1E0073D98B /* main.m */; };
+		BA084AEA1B0A4E75008F471C /* Environment.m in Sources */ = {isa = PBXBuildFile; fileRef = BA14D8A41B0938190073D98B /* Environment.m */; };
+		BA084AEB1B0A4E75008F471C /* Core.m in Sources */ = {isa = PBXBuildFile; fileRef = BA14D8CC1B094D320073D98B /* Core.m */; };
+		BA084AED1B0A4E75008F471C /* Function.m in Sources */ = {isa = PBXBuildFile; fileRef = BA14D8A11B09321F0073D98B /* Function.m */; };
+		BA084AEE1B0A4E75008F471C /* NSArray+Functional.m in Sources */ = {isa = PBXBuildFile; fileRef = BA14D88B1B092D1B0073D98B /* NSArray+Functional.m */; };
+		BA084AF61B0A4E8E008F471C /* step5_tco.m in Sources */ = {isa = PBXBuildFile; fileRef = BA084AF51B0A4E8E008F471C /* step5_tco.m */; };
 		BA14D8881B092A1E0073D98B /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = BA14D8871B092A1E0073D98B /* main.m */; };
 		BA14D8891B092A1E0073D98B /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = BA14D8871B092A1E0073D98B /* main.m */; };
 		BA14D88C1B092D1B0073D98B /* NSArray+Functional.m in Sources */ = {isa = PBXBuildFile; fileRef = BA14D88B1B092D1B0073D98B /* NSArray+Functional.m */; };
@@ -46,6 +56,15 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
+		BA084AF01B0A4E75008F471C /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = /usr/share/man/man1/;
+			dstSubfolderSpec = 0;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 1;
+		};
 		BA14D8961B092D800073D98B /* CopyFiles */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
@@ -94,6 +113,8 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		BA084AF41B0A4E75008F471C /* step5_tco */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = step5_tco; sourceTree = BUILT_PRODUCTS_DIR; };
+		BA084AF51B0A4E8E008F471C /* step5_tco.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = step5_tco.m; sourceTree = "<group>"; };
 		BA14D8871B092A1E0073D98B /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		BA14D88A1B092D1B0073D98B /* NSArray+Functional.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSArray+Functional.h"; sourceTree = "<group>"; };
 		BA14D88B1B092D1B0073D98B /* NSArray+Functional.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSArray+Functional.m"; sourceTree = "<group>"; };
@@ -127,6 +148,13 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		BA084AEF1B0A4E75008F471C /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		BA14D8951B092D800073D98B /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -183,6 +211,7 @@
 				BA14D89A1B092D800073D98B /* step2_eval */,
 				BA14D8B61B0938690073D98B /* step3_env */,
 				BA14D8C71B0942C50073D98B /* step4_if_fn_do */,
+				BA084AF41B0A4E75008F471C /* step5_tco */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -197,6 +226,7 @@
 				BA14D89B1B092DC60073D98B /* step2_eval.m */,
 				BA14D8A61B0938620073D98B /* step3_env.m */,
 				BA14D8C81B0942EC0073D98B /* step4_if_fn_do.m */,
+				BA084AF51B0A4E8E008F471C /* step5_tco.m */,
 				BA3A5B521B0911220081CE50 /* Helpers */,
 				BA3A5B331B0902350081CE50 /* Tokenizer.h */,
 				BA3A5B341B0902350081CE50 /* Tokenizer.m */,
@@ -237,6 +267,23 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		BA084AE31B0A4E75008F471C /* step5_tco */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = BA084AF11B0A4E75008F471C /* Build configuration list for PBXNativeTarget "step5_tco" */;
+			buildPhases = (
+				BA084AE41B0A4E75008F471C /* Sources */,
+				BA084AEF1B0A4E75008F471C /* Frameworks */,
+				BA084AF01B0A4E75008F471C /* CopyFiles */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = step5_tco;
+			productName = "mal-objc";
+			productReference = BA084AF41B0A4E75008F471C /* step5_tco */;
+			productType = "com.apple.product-type.tool";
+		};
 		BA14D88D1B092D800073D98B /* step2_eval */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = BA14D8971B092D800073D98B /* Build configuration list for PBXNativeTarget "step2_eval" */;
@@ -353,11 +400,29 @@
 				BA14D88D1B092D800073D98B /* step2_eval */,
 				BA14D8A71B0938690073D98B /* step3_env */,
 				BA14D8B81B0942C50073D98B /* step4_if_fn_do */,
+				BA084AE31B0A4E75008F471C /* step5_tco */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXSourcesBuildPhase section */
+		BA084AE41B0A4E75008F471C /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				BA084AE51B0A4E75008F471C /* Tokenizer.m in Sources */,
+				BA084AF61B0A4E8E008F471C /* step5_tco.m in Sources */,
+				BA084AE61B0A4E75008F471C /* Types.m in Sources */,
+				BA084AE71B0A4E75008F471C /* Reader.m in Sources */,
+				BA084AE81B0A4E75008F471C /* Printer.m in Sources */,
+				BA084AE91B0A4E75008F471C /* main.m in Sources */,
+				BA084AEA1B0A4E75008F471C /* Environment.m in Sources */,
+				BA084AEB1B0A4E75008F471C /* Core.m in Sources */,
+				BA084AED1B0A4E75008F471C /* Function.m in Sources */,
+				BA084AEE1B0A4E75008F471C /* NSArray+Functional.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		BA14D88E1B092D800073D98B /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -432,6 +497,22 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin XCBuildConfiguration section */
+		BA084AF21B0A4E75008F471C /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				OTHER_LDFLAGS = "-lreadline";
+				PRODUCT_NAME = step5_tco;
+			};
+			name = Debug;
+		};
+		BA084AF31B0A4E75008F471C /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				OTHER_LDFLAGS = "-lreadline";
+				PRODUCT_NAME = step5_tco;
+			};
+			name = Release;
+		};
 		BA14D8981B092D800073D98B /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -592,6 +673,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		BA084AF11B0A4E75008F471C /* Build configuration list for PBXNativeTarget "step5_tco" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				BA084AF21B0A4E75008F471C /* Debug */,
+				BA084AF31B0A4E75008F471C /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		BA14D8971B092D800073D98B /* Build configuration list for PBXNativeTarget "step2_eval" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
