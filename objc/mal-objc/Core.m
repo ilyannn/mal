@@ -167,7 +167,9 @@
     if (error) {
         @throw [NSException exceptionWithName:@"FileAccessProblem" 
                                        reason:@"Couldn't read a file" 
-                                     userInfo:@{@"error" : error}];
+                                     userInfo:@{@"error" : error,
+                                                @"filename" : filename
+                }];
     }
     
     return str;

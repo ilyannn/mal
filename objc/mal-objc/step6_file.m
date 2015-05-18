@@ -45,7 +45,9 @@ NSString *PRINT(id ast) {
         _globalEnvironment = [[Environment alloc] initWithOuter:nil 
                                                           binds:core.bindings 
                                                           exprs:core.operations];
+        
         [self rep:@"(def! not (fn* (a) (if a false true)))"];
+        [self rep:@"(def! load-file (fn* (f) (eval (read-string (str \"(do \" (slurp f) \")\")))))"];
    }
     return self;
 }
