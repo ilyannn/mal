@@ -16,12 +16,16 @@ Token const ListLeft    = @"(";
 Token const VectorLeft  = @"[";
 Token const ListRight   = @")";
 Token const VectorRight = @"]";
+Token const MapLeft     = @"{";
+Token const MapRight    = @"}";
+
 Token const Commenting  = @";";
 Token const Quote       = @"\'";
 Token const Quasiquote  = @"`";
 Token const Unquote     = @"~";
 Token const Deref       = @"@";
 Token const String      = @"\"";
+Token const Metadata    = @"^";
 
 Token const True        = @"true";
 Token const False       = @"false";
@@ -61,12 +65,15 @@ Token const False       = @"false";
         dispatch_once(&onceToken, ^{
             NSMutableCharacterSet *chars = [Tokenizer skipSet];
 
+            [chars addCharactersInString:MapLeft];
+            [chars addCharactersInString:MapRight];
             [chars addCharactersInString:ListLeft];
             [chars addCharactersInString:ListRight];
             [chars addCharactersInString:VectorLeft];
             [chars addCharactersInString:VectorRight];
             
             [chars addCharactersInString:Commenting];
+            [chars addCharactersInString:Metadata];
             [chars addCharactersInString:Deref];
             
             [chars addCharactersInString:Quote];
@@ -126,12 +133,24 @@ Token const False       = @"false";
         case '(':
             return [self read_list: NO];
 
+        case '^':
+            return [self read_meta];
+            
+        case '{':
+            return [self read_map];
+
         case '[':
             return [self read_list: YES];
             
         default:
             return [self read_atom];
     }
+}
+
+- (id)read_meta {
+    [self consume:Metadata];
+    NSDictionary *meta = [self read_map];
+    return @[self.qq.with_meta, [self read_form], meta];
 }
 
 - (id)read_quote {
@@ -175,6 +194,23 @@ Token const False       = @"false";
 
     return vector ? elements : [elements copy];
 }
+
+- (NSDictionary *)read_map {
+    [self consume: MapLeft];
+    
+    NSMutableDictionary *map = [NSMutableDictionary new];
+    
+    while(![self.tokenizer.peek isEqualTo:MapRight]) {
+        id key = [self read_form]; 
+        id object = [self read_form]; 
+        [map setObject:object forKey:key];
+    }
+    
+    [self consume: MapRight];
+    
+    return [map copy];
+}
+
 
 - (id)read_atom {
     

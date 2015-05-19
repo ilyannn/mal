@@ -18,6 +18,7 @@
 @property (readonly) Symbol *splice_unquote;
 @property (readonly) Symbol *concat;
 @property (readonly) Symbol *cons;
+@property (readonly) Symbol *with_meta;
 
 - (id)quasiquote:(id)ast;
 @end

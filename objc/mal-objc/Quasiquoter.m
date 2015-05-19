@@ -22,6 +22,7 @@
         _cons = [[Symbol alloc] initWithName:@"cons"];
         _unquote = [[Symbol alloc] initWithName:@"unquote"];
         _splice_unquote = [[Symbol alloc] initWithName:@"splice-unquote"];
+        _with_meta = [[Symbol alloc] initWithName:@"with-meta"];
     }
     return self;
 }
