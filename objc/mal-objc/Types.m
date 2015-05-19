@@ -8,6 +8,7 @@
 
 #import "Types.h"
 #import "NSArray+Functional.h"
+#import "Printer.h"
 
 @implementation NSString (Type)
 
@@ -31,7 +32,7 @@
 
 @end
 
-@implementation NSNull (Printer)
+@implementation NSNull (Type)
 
 - (NSString *)print {
     return @"nil";
@@ -44,7 +45,7 @@
 @end
 
 
-@implementation NSNumber (Printer)
+@implementation NSNumber (Type)
 
 - (NSNumberFormatter *)numberFormatter {    
     static dispatch_once_t onceToken;
@@ -67,7 +68,7 @@
 
 @end
 
-@implementation NSArray (Printer)
+@implementation NSArray (Type)
 
 - (NSString *)print {
     return [self printReadably:NO];
@@ -75,11 +76,7 @@
 
 - (NSString *)printReadably:(BOOL)print_readably withLeft:(NSString *)left right:(NSString *)right {
     return [NSString stringWithFormat:@"%@%@%@", left, [[self arrayByMapping:^id(id object) {
-        if (print_readably && [object respondsToSelector:@selector(printReadably:)]) {
-            return [object printReadably: YES];
-        } else {
-            return [object print];
-        }
+        return [[Printer new] print:object readably:print_readably];
     }] componentsJoinedByString:@" "], right];
 }
 
@@ -97,7 +94,8 @@
 
 @end
 
-@implementation NSMutableArray (Printer)
+
+@implementation NSMutableArray (Type)
 
 - (NSString *)printReadably:(BOOL)print_readably {
     return [self printReadably:print_readably withLeft:@"[" right:@"]"];
@@ -108,6 +106,29 @@
 }
 
 @end
+
+
+@implementation NSDictionary (Type)
+
+- (NSString *)print {
+    return [self printReadably:NO];
+}
+
+- (NSString *)printReadably:(BOOL)print_readably {
+    return [NSString stringWithFormat:@"{%@}", [[[self allKeys] arrayByMapping:^id(id key) {
+        Printer *printer = [Printer new];
+        return [NSString stringWithFormat:@"%@ %@", 
+                [printer print:key readably:print_readably],
+                [printer print:self[key] readably:print_readably]];
+    }] componentsJoinedByString:@" "]];
+}
+
+- (BOOL)truthValue {
+    return true;
+}
+
+@end
+
 
 @implementation Symbol
 
