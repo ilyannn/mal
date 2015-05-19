@@ -13,9 +13,9 @@
 @interface Quasiquoter ()
 @property (readonly) Symbol *quote;
 @property (readonly) Symbol *unquote;
+@property (readonly) Symbol *splice_unquote;
 @property (readonly) Symbol *concat;
 @property (readonly) Symbol *cons;
-@property (readonly) Symbol *splice_unquote;
 @end
 
 
@@ -25,9 +25,9 @@
 {
     if (self = [super init]) {
         _quote = [[Symbol alloc] initWithName:@"quote"];
-        _unquote = [[Symbol alloc] initWithName:@"unquote"];
         _concat = [[Symbol alloc] initWithName:@"concat"];
         _cons = [[Symbol alloc] initWithName:@"cons"];
+        _unquote = [[Symbol alloc] initWithName:@"unquote"];
         _splice_unquote = [[Symbol alloc] initWithName:@"splice-unquote"];
     }
     return self;

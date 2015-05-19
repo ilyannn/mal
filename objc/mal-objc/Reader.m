@@ -15,6 +15,14 @@ Token const RightParen = @")]";
 Token const LeftParen  = @"([";
 Token const Comma      = @",";
 Token const Quote      = @"\'";
+Token const Quasiquote = @"`";
+Token const Unquote    = @"~";
+Token const AndSplice  = @"@";
+Token const String     = @"\"";
+
+Token const True       = @"true";
+Token const False      = @"false";
+
 
 @implementation NSString (SafeFirst)
 - (unichar)safeFirstCharacter {
@@ -41,7 +49,10 @@ Token const Quote      = @"\'";
 
 @interface Reader()
 @property Tokenizer *tokenizer;
-@property Symbol *quote;
+@property (readonly) Symbol *quote;
+@property (readonly) Symbol *quasiquote;
+@property (readonly) Symbol *unquote;
+@property (readonly) Symbol *splice_unquote;
 @end
 
 @implementation Reader
@@ -51,6 +62,9 @@ Token const Quote      = @"\'";
 - (instancetype)initWithString:(NSString *)line {
     if (self = [super init]) {
         _quote = [[Symbol alloc] initWithName:@"quote"];
+        _quasiquote = [[Symbol alloc] initWithName:@"quasiquote"];
+        _unquote = [[Symbol alloc] initWithName:@"unquote"];
+        _splice_unquote = [[Symbol alloc] initWithName:@"splice-unquote"];
         _tokenizer = [[Tokenizer alloc] initWithString:line delimiters:[[self class] delimiterSet]];
     }
     return self;
@@ -65,7 +79,11 @@ Token const Quote      = @"\'";
             [chars addCharactersInString:RightParen];
             [chars addCharactersInString:LeftParen];
             [chars addCharactersInString:Comma];
+            
             [chars addCharactersInString:Quote];
+            [chars addCharactersInString:Unquote];
+            [chars addCharactersInString:Quasiquote];
+            [chars addCharactersInString:AndSplice];
             
             delimiters = [chars copy];
         });
@@ -108,6 +126,12 @@ Token const Quote      = @"\'";
         case '\'':
             return [self read_quote];
 
+        case '`':
+            return [self read_quasiquote];
+
+        case '~':
+            return [self read_unquote];
+
         case '(':
         case '[':
             return [self read_list];
@@ -118,8 +142,21 @@ Token const Quote      = @"\'";
 }
 
 - (id)read_quote {
-    [self consume:@"\'"];
+    [self consume:Quote];
     return @[self.quote, [self read_form]];
+}
+
+- (id)read_unquote {
+    [self consume:Unquote];
+    if ([self.tokenizer.peek isEqualTo:AndSplice]) {
+        [self consume:AndSplice];
+    }
+    return @[self.quote, [self read_form]];
+}
+
+- (id)read_quasiquote {
+    [self consume:Quasiquote];
+    return @[self.quasiquote, [self read_form]];
 }
 
 - (id)read_list {
@@ -142,16 +179,16 @@ Token const Quote      = @"\'";
     
     Token token = [self.tokenizer next];
     
-    if ([token characterAtIndex:0] == '"') {
+    if ([token characterAtIndex:0] == [String safeFirstCharacter]) {
         NSRange range = NSMakeRange(1, token.length - 2);
         return [token substringWithRange:range];
     } 
     
-    if ([token isEqual:@"true"]) {
+    if ([token isEqual:True]) {
         return [[Truth alloc] initWithTruth:YES];
     }
     
-    if ([token isEqual:@"false"]) {
+    if ([token isEqual:False]) {
         return [[Truth alloc] initWithTruth:NO];
     } 
     
