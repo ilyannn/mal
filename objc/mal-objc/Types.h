@@ -34,10 +34,17 @@
 @interface NSDictionary(Type) <Type>
 @end
 
-@interface Symbol: NSObject <Type>
-+ (instancetype)symbolWithName:(NSString *)name;
+@interface Named: NSObject
 - (instancetype)initWithName:(NSString *)name;
 @property (readonly) NSString *name;
+@end
+
+@interface Keyword: Named <Type>
++ (instancetype)keywordWithName:(NSString *)name;
+@end
+
+@interface Symbol: Named <Type>
++ (instancetype)symbolWithName:(NSString *)name;
 @end
 
 @interface Truth: NSObject <Type>

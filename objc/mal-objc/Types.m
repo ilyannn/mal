@@ -130,14 +130,10 @@
 @end
 
 
-@implementation Symbol
+@implementation Named
 
 - (BOOL)truthValue {
     return true;
-}
-
-+ (instancetype)symbolWithName:(NSString *)name {
-    return [[self alloc] initWithName:name];
 }
 
 - (instancetype)initWithName:(NSString *)name {
@@ -148,19 +144,17 @@
 }
 
 - (NSString *)print {
-    return self.name;
-}
-
-- (NSString *)description {
-    return [NSString stringWithFormat:@"(symbol)%@", self.name];
+    @throw @"not implemented";
 }
 
 - (NSUInteger)hash {
-    return [self.name hash];
+    return [self.description hash];
 }
 
 - (BOOL)isEqual:(id)object {
-    return [object isKindOfClass:[Symbol class]] && [self.name isEqual:[object name]];
+    return [object isKindOfClass:[self class]] 
+    	&& [self isKindOfClass:[object class]] 
+        && [self.name isEqual:[object name]];
 }
 
 - (id)copyWithZone:(NSZone *)zone {
@@ -169,6 +163,37 @@
 
 @end
 
+@implementation Symbol 
+
++ (instancetype)symbolWithName:(NSString *)name {
+    return [[self alloc] initWithName:name];
+}
+
+- (NSString *)print {
+    return self.name;
+}
+
+- (NSString *)description {
+	return [NSString stringWithFormat:@"(symbol)%@", self.name];
+}
+
+@end
+
+@implementation Keyword
+
++ (instancetype)keywordWithName:(NSString *)name {
+    return [[self alloc] initWithName:name];
+}
+
+- (NSString *)print {
+    return [NSString stringWithFormat:@":%@", self.name];
+}
+
+- (NSString *)description {
+    return [NSString stringWithFormat:@"(kw)%@", self.name];
+}
+
+@end
 
 @implementation Truth
 

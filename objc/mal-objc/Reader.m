@@ -25,6 +25,7 @@ Token const Quasiquote  = @"`";
 Token const Unquote     = @"~";
 Token const Deref       = @"@";
 Token const String      = @"\"";
+Token const Key         = @":";
 Token const Metadata    = @"^";
 
 Token const True        = @"true";
@@ -216,10 +217,15 @@ Token const False       = @"false";
     
     Token token = [self.tokenizer next];
     
-    if ([token characterAtIndex:0] == [String safeFirstCharacter]) {
+    if ([token safeFirstCharacter] == [String safeFirstCharacter]) {
         NSRange range = NSMakeRange(1, token.length - 2);
         return [token substringWithRange:range];
     } 
+
+    if ([token safeFirstCharacter] == [Key safeFirstCharacter]) {
+        NSRange range = NSMakeRange(1, token.length - 1);
+        return [Keyword keywordWithName:[token substringWithRange:range]];
+    }
     
     if ([token isEqual:True]) {
         return [[Truth alloc] initWithTruth:YES];
@@ -230,7 +236,7 @@ Token const False       = @"false";
     } 
     
     NSNumber *number = [self.numberFormatter numberFromString:token];
-    return number ?: [[Symbol alloc] initWithName:token];    
+    return number ?: [Symbol symbolWithName:token];    
 }
 
 @end

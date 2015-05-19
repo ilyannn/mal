@@ -18,6 +18,7 @@
 
 #import "Reader.h"
 #import "Printer.h"
+#import "Types.h"
 
 #import "Function.h"
 #import "NSArray+Functional.h"
@@ -65,19 +66,31 @@ NSString *PRINT(id ast) {
 }
 
 - (id)eval_ast:(id)ast {
-    if ([ast isKindOfClass:[NSString class]]) {        // Symbol
-        return self.environment[ast];
+    if ([ast isKindOfClass:[Symbol class]]) {        // Symbol
+        return self.environment[[ast name]];
+    } else if ([ast isKindOfClass:[NSMutableArray class]]) { // Vector
+        return [[ast arrayByMapping:^id(id sub) {
+            return [self eval:sub];
+        }] mutableCopy];
     } else if ([ast isKindOfClass:[NSArray class]]) { // List
         return [ast arrayByMapping:^id(id sub) {
             return [self eval:sub];
         }];
-    } else {
+    } else if ([ast isKindOfClass:[NSDictionary class]]) { // Map
+        NSArray *keys = [ast allKeys];
+        
+        NSArray *evalobjs = [keys arrayByMapping:^id(id key) {
+            return [self eval:ast[key]];
+        }];
+        
+        return [NSDictionary dictionaryWithObjects:evalobjs forKeys:keys];
+    } {
         return ast;
     }
 }
 
 - (id)eval:(id)ast {
-    if (![ast isKindOfClass:[NSArray class]]) {
+    if (![ast isKindOfClass:[NSArray class]] || [ast isKindOfClass:[NSMutableArray class]]) {
         return [self eval_ast:ast];
     }
     
