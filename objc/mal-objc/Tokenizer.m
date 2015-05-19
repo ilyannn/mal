@@ -27,6 +27,12 @@
     return self;
 }
 
+- (NSString *)description {
+    NSString *string = self.scanner.string;
+    NSRange range = NSMakeRange(self.scanner.scanLocation, 0);
+    return [string stringByReplacingCharactersInRange:range withString:@"➤"];
+}
+
 - (Token)next {    
     Token next = self.peek;
     _peek = nil;

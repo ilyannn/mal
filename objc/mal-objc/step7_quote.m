@@ -150,7 +150,7 @@ NSString *PRINT(id ast) {
                     
                 case 6: // quasiquote
                 {
-                    ast = [self.quasiquoter quasiquote:ast];
+                    ast = [self.quasiquoter quasiquote:ast[1]];
                     continue; // tco
                 }
                 

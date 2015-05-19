@@ -14,6 +14,18 @@
 Token const RightParen = @")]";
 Token const LeftParen  = @"([";
 Token const Comma      = @",";
+Token const Quote      = @"\'";
+
+@implementation NSString (SafeFirst)
+- (unichar)safeFirstCharacter {
+    if ([self length] == 0) {
+        return 0;
+    } else {
+        return [self characterAtIndex:0];
+    }
+}
+@end
+
 
 @implementation NSString (Parens)
 
@@ -29,6 +41,7 @@ Token const Comma      = @",";
 
 @interface Reader()
 @property Tokenizer *tokenizer;
+@property Symbol *quote;
 @end
 
 @implementation Reader
@@ -37,6 +50,7 @@ Token const Comma      = @",";
 
 - (instancetype)initWithString:(NSString *)line {
     if (self = [super init]) {
+        _quote = [[Symbol alloc] initWithName:@"quote"];
         _tokenizer = [[Tokenizer alloc] initWithString:line delimiters:[[self class] delimiterSet]];
     }
     return self;
@@ -51,6 +65,7 @@ Token const Comma      = @",";
             [chars addCharactersInString:RightParen];
             [chars addCharactersInString:LeftParen];
             [chars addCharactersInString:Comma];
+            [chars addCharactersInString:Quote];
             
             delimiters = [chars copy];
         });
@@ -86,19 +101,28 @@ Token const Comma      = @",";
 
 - (id)read_form {
     Token token = self.tokenizer.peek;
-    if (![token length]) {
-        return nil;
-    }
-    
-    if ([token isLeftParen]) {
-        return [self read_list];
-    } else {
-        return [self read_atom];
+    switch ([token safeFirstCharacter]) {
+        case 0: 
+            return nil;
+            
+        case '\'':
+            return [self read_quote];
+
+        case '(':
+        case '[':
+            return [self read_list];
+            
+        default:
+            return [self read_atom];
     }
 }
 
-- (id)read_list {
+- (id)read_quote {
+    [self consume:@"\'"];
+    return @[self.quote, [self read_form]];
+}
 
+- (id)read_list {
     [self consume:LeftParen];
     
     NSMutableArray *elements = [NSMutableArray new];
