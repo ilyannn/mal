@@ -18,7 +18,7 @@ Token const Commenting = @";";
 Token const Quote      = @"\'";
 Token const Quasiquote = @"`";
 Token const Unquote    = @"~";
-Token const AndSplice  = @"@";
+Token const Deref      = @"@";
 Token const String     = @"\"";
 
 Token const True       = @"true";
@@ -78,7 +78,7 @@ Token const False      = @"false";
             [chars addCharactersInString:Quote];
             [chars addCharactersInString:Unquote];
             [chars addCharactersInString:Quasiquote];
-            [chars addCharactersInString:AndSplice];
+            [chars addCharactersInString:Deref];
             
             delimiters = [chars copy];
         });
@@ -127,6 +127,9 @@ Token const False      = @"false";
         case '~':
             return [self read_unquote];
 
+        case '@':
+            return [self read_deref];
+            
         case '(':
         case '[':
             return [self read_list];
@@ -141,11 +144,16 @@ Token const False      = @"false";
     return @[self.qq.quote, [self read_form]];
 }
 
+- (id)read_deref {
+    [self consume:Deref];
+    return @[self.qq.deref, [self read_form]];
+}
+
 - (id)read_unquote {
     [self consume:Unquote];
     
-    if ([self.tokenizer.peek isEqualTo:AndSplice]) {
-        [self consume:AndSplice];
+    if ([self.tokenizer.peek isEqualTo:Deref]) {
+        [self consume:Deref];
         return @[self.qq.splice_unquote, [self read_form]];
     }
     

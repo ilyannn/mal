@@ -16,6 +16,7 @@
 {
     if (self = [super init]) {
         _quote = [[Symbol alloc] initWithName:@"quote"];
+        _deref = [[Symbol alloc] initWithName:@"deref"];
         _quasiquote = [[Symbol alloc] initWithName:@"quasiquote"];
         _concat = [[Symbol alloc] initWithName:@"concat"];
         _cons = [[Symbol alloc] initWithName:@"cons"];
