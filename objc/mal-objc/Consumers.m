@@ -78,6 +78,8 @@
                 chstr[0] = ch;
         }
         
+        self.inSpecial = NO;
+        
     } else {
         
         switch (ch) {

@@ -38,7 +38,7 @@
 - (NSString *)description {
     NSString *string = self.scanner.string;
     NSRange range = NSMakeRange(self.scanner.scanLocation, 0);
-    return [string stringByReplacingCharactersInRange:range withString:@"➤"];
+    return [string stringByReplacingCharactersInRange:range withString:_peek ? @"⬅︎": @"➡︎"];
 }
 
 - (Token)next {    
@@ -63,11 +63,11 @@
 
 - (void)consumeCharactersWithConsumer:(id<CharacterConsuming>)consumer {    
     // Skip manually.
-    for (; !self.scanner.atEnd; self.scanner.scanLocation ++) {
-        if (![consumer continueConsumingAt:self.currentCharacter]) {
-            break;
-        }
+    if (self.scanner.atEnd) {
+        return;
     }
+    
+    for (; [consumer continueConsumingAt:self.currentCharacter]; self.scanner.scanLocation++) {}
 }
 
  /**
