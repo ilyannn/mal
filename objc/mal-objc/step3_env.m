@@ -51,54 +51,66 @@ NSString *PRINT(id ast) {
     [environment set: [Function operationWithIntegers:
                        ^NSInteger(NSInteger a, NSInteger b) {
                            return a + b;
-                       }] forSymbol: @"+"];
+                       }] forSymbol: [Symbol symbolWithName:@"+"]];
     
     
     [environment set: [Function operationWithIntegers:
                        ^NSInteger(NSInteger a, NSInteger b) {
                            return a - b;
-                       }] forSymbol: @"-"];
+                       }] forSymbol: [Symbol symbolWithName:@"-"]];
     
     [environment set: [Function operationWithIntegers:
                        ^NSInteger(NSInteger a, NSInteger b) {
                            return a * b;
-                       }] forSymbol: @"*"];
+                       }] forSymbol: [Symbol symbolWithName:@"*"]];
     
     [environment set: [Function operationWithIntegers:
                        ^NSInteger(NSInteger a, NSInteger b) {
                            return a / b;
-                       }] forSymbol: @"/"];
+                       }] forSymbol: [Symbol symbolWithName:@"/"]];
     
 }
 
 - (id)eval_ast:(id)ast env:(Environment *)env {
-    if ([ast isKindOfClass:[NSString class]]) {        // Symbol
+    if ([ast isKindOfClass:[Symbol class]]) {        // Symbol
         return [env getObjectForSymbol:ast];
+    } else if ([ast isKindOfClass:[NSMutableArray class]]) { // Vector
+        return [[ast arrayByMapping:^id(id sub) {
+            return [self eval:sub env:env];
+        }] mutableCopy];
     } else if ([ast isKindOfClass:[NSArray class]]) { // List
         return [ast arrayByMapping:^id(id sub) {
             return [self eval:sub env:env];
         }];
-    } else {
+    } else if ([ast isKindOfClass:[NSDictionary class]]) { // Map
+        NSArray *keys = [ast allKeys];
+        
+        NSArray *evalobjs = [keys arrayByMapping:^id(id key) {
+            return [self eval:ast[key] env:env];
+        }];
+        
+        return [NSDictionary dictionaryWithObjects:evalobjs forKeys:keys];
+    } {
         return ast;
     }
 }
 
 - (id)eval:(id)ast env:(Environment *)env{
     
-    if (![ast isKindOfClass:[NSArray class]]) {
+    if (![ast isKindOfClass:[NSArray class]] || [ast isKindOfClass:[NSMutableArray class]]) {
         return [self eval_ast:ast env:env];
     }
     
-    if ([[ast firstObject] isEqual:@"def!"]) {
+    if ([[ast firstObject] isEqual:[Symbol symbolWithName:@"def!"]]) {
         id def = [self eval:ast[2] env:env];
         [env set:def forSymbol:ast[1]];
         return def;
     }
     
-    if ([[ast firstObject] isEqual:@"let*"]) {
+    if ([[ast firstObject] isEqual:[Symbol symbolWithName:@"let*"]]) {
         Environment *child = [[Environment alloc] initWithOuter:env];
         for (NSInteger index = 0; index < [ast[1] count];) {
-            NSString *symbol = ast[1][index++];
+            Symbol *symbol = ast[1][index++];
             id expr = ast[1][index++];
             [child set:[self eval:expr env:child] forSymbol:symbol];
         }
