@@ -9,6 +9,7 @@
 #import "Reader.h"
 
 #import "Tokenizer.h"
+#import "Quasiquoter.h"
 #import "Types.h"
 
 Token const RightParen = @")]";
@@ -48,11 +49,8 @@ Token const False      = @"false";
 @end
 
 @interface Reader()
-@property Tokenizer *tokenizer;
-@property (readonly) Symbol *quote;
-@property (readonly) Symbol *quasiquote;
-@property (readonly) Symbol *unquote;
-@property (readonly) Symbol *splice_unquote;
+@property (readonly) Tokenizer *tokenizer;
+@property (readonly) Quasiquoter *qq;
 @end
 
 @implementation Reader
@@ -61,10 +59,7 @@ Token const False      = @"false";
 
 - (instancetype)initWithString:(NSString *)line {
     if (self = [super init]) {
-        _quote = [[Symbol alloc] initWithName:@"quote"];
-        _quasiquote = [[Symbol alloc] initWithName:@"quasiquote"];
-        _unquote = [[Symbol alloc] initWithName:@"unquote"];
-        _splice_unquote = [[Symbol alloc] initWithName:@"splice-unquote"];
+        _qq = [Quasiquoter new];
         _tokenizer = [[Tokenizer alloc] initWithString:line delimiters:[[self class] delimiterSet]];
     }
     return self;
@@ -143,7 +138,7 @@ Token const False      = @"false";
 
 - (id)read_quote {
     [self consume:Quote];
-    return @[self.quote, [self read_form]];
+    return @[self.qq.quote, [self read_form]];
 }
 
 - (id)read_unquote {
@@ -151,15 +146,15 @@ Token const False      = @"false";
     
     if ([self.tokenizer.peek isEqualTo:AndSplice]) {
         [self consume:AndSplice];
-        return @[self.splice_unquote, [self read_form]];
+        return @[self.qq.splice_unquote, [self read_form]];
     }
     
-    return @[self.unquote, [self read_form]];
+    return @[self.qq.unquote, [self read_form]];
 }
 
 - (id)read_quasiquote {
     [self consume:Quasiquote];
-    return @[self.quasiquote, [self read_form]];
+    return @[self.qq.quasiquote, [self read_form]];
 }
 
 - (id)read_list {

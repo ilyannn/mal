@@ -10,21 +10,13 @@
 
 #import "Types.h"
 
-@interface Quasiquoter ()
-@property (readonly) Symbol *quote;
-@property (readonly) Symbol *unquote;
-@property (readonly) Symbol *splice_unquote;
-@property (readonly) Symbol *concat;
-@property (readonly) Symbol *cons;
-@end
-
-
 @implementation Quasiquoter
 
 - (instancetype)init
 {
     if (self = [super init]) {
         _quote = [[Symbol alloc] initWithName:@"quote"];
+        _quasiquote = [[Symbol alloc] initWithName:@"quasiquote"];
         _concat = [[Symbol alloc] initWithName:@"concat"];
         _cons = [[Symbol alloc] initWithName:@"cons"];
         _unquote = [[Symbol alloc] initWithName:@"unquote"];

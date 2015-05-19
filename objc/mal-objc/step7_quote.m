@@ -83,10 +83,9 @@ NSString *PRINT(id ast) {
         }
         
         if ([[ast firstObject] isKindOfClass:[Symbol class]]) {
-            NSArray *specials = @[@"def!", @"let*", @"do", @"if", @"fn*", 
-                                  @"quote", @"quasiquote", @"unquote", @"splice-unquote"];
             
-            switch ([specials indexOfObject:[[ast firstObject] name]]) {
+            switch ([@[@"def!", @"let*", @"do", @"if", @"fn*"] 
+                     indexOfObject:[[ast firstObject] name]]) {
                 case 0: // def!
                 {
                 	id def = [self eval:ast[2] env:env];
@@ -142,28 +141,23 @@ NSString *PRINT(id ast) {
                         
                     } params:binds env:env ast:expr];            
                 }
-                    
-                case 5: // quote
-                {
-                    return ast[1];
-                }
-                    
-                case 6: // quasiquote
-                {
+            }
+            
+            NSArray *quotes = @[self.quasiquoter.quasiquote, self.quasiquoter.quote, 
+                                self.quasiquoter.unquote, self.quasiquoter.splice_unquote];
+            
+            switch ([quotes indexOfObject:[ast firstObject]]) {
+                case 0: // quasiquote
                     ast = [self.quasiquoter quasiquote:ast[1]];
                     continue; // tco
-                }
+                    break;
+                
+                case NSNotFound:
+                    break;
                     
-                case 7: // unquote
-                {
+                default: // the rest of quotes
                     return ast[1];
-                }
-
-                case 8: // splice-unquote
-                {
-                    return ast[1];
-                }
-                    
+                    break;
             }
             
         }
