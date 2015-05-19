@@ -25,7 +25,7 @@ id READ(NSString *line) {
 
 NSString *PRINT(id ast) {
     Printer *printer = [[Printer alloc] init];
-    return [printer print:ast];
+    return [printer print:ast readably:YES];
 }
 
 id EVAL(id ast) {
