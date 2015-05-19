@@ -11,12 +11,13 @@
 
 #import "NSArray+Functional.h"
 
+
 @implementation Core
 
 #pragma mark - Environment
 
 - (instancetype)init {
-    if (self = [super init]) {
+    if (self = [super init]) {        
         _bindings = [[[self selectorDict] allKeys] // fix order
                      arrayByMapping:^id(NSString *key) {
                          return [Symbol symbolWithName:key];

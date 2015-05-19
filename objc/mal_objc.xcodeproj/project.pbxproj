@@ -19,6 +19,7 @@
 		BA0193AA1B0B9A8300D04B73 /* Consumers.m in Sources */ = {isa = PBXBuildFile; fileRef = BA084B0D1B0A65A0008F471C /* Consumers.m */; };
 		BA0193B21B0B9ABA00D04B73 /* step7_quote.m in Sources */ = {isa = PBXBuildFile; fileRef = BA0193B11B0B9ABA00D04B73 /* step7_quote.m */; };
 		BA0193B31B0B9AC100D04B73 /* step6_file.m in Sources */ = {isa = PBXBuildFile; fileRef = BA084B091B0A55AE008F471C /* step6_file.m */; };
+		BA0193B61B0B9E9900D04B73 /* Quasiquoter.m in Sources */ = {isa = PBXBuildFile; fileRef = BA0193B51B0B9E9900D04B73 /* Quasiquoter.m */; };
 		BA084AE51B0A4E75008F471C /* Tokenizer.m in Sources */ = {isa = PBXBuildFile; fileRef = BA3A5B341B0902350081CE50 /* Tokenizer.m */; };
 		BA084AE61B0A4E75008F471C /* Types.m in Sources */ = {isa = PBXBuildFile; fileRef = BA14D8CF1B095EE90073D98B /* Types.m */; };
 		BA084AE71B0A4E75008F471C /* Reader.m in Sources */ = {isa = PBXBuildFile; fileRef = BA3A5B481B090A9A0081CE50 /* Reader.m */; };
@@ -160,6 +161,8 @@
 /* Begin PBXFileReference section */
 		BA0193B01B0B9A8300D04B73 /* step7_quote */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = step7_quote; sourceTree = BUILT_PRODUCTS_DIR; };
 		BA0193B11B0B9ABA00D04B73 /* step7_quote.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = step7_quote.m; sourceTree = "<group>"; };
+		BA0193B41B0B9E9900D04B73 /* Quasiquoter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Quasiquoter.h; sourceTree = "<group>"; };
+		BA0193B51B0B9E9900D04B73 /* Quasiquoter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Quasiquoter.m; sourceTree = "<group>"; };
 		BA084AF41B0A4E75008F471C /* step5_tco */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = step5_tco; sourceTree = BUILT_PRODUCTS_DIR; };
 		BA084AF51B0A4E8E008F471C /* step5_tco.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = step5_tco.m; sourceTree = "<group>"; };
 		BA084B081B0A5583008F471C /* step6_file */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = step6_file; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -331,6 +334,8 @@
 				BA14D88B1B092D1B0073D98B /* NSArray+Functional.m */,
 				BA084B0C1B0A65A0008F471C /* Consumers.h */,
 				BA084B0D1B0A65A0008F471C /* Consumers.m */,
+				BA0193B41B0B9E9900D04B73 /* Quasiquoter.h */,
+				BA0193B51B0B9E9900D04B73 /* Quasiquoter.m */,
 			);
 			name = Helpers;
 			sourceTree = "<group>";
@@ -520,6 +525,7 @@
 				BA0193B21B0B9ABA00D04B73 /* step7_quote.m in Sources */,
 				BA0193A01B0B9A8300D04B73 /* Tokenizer.m in Sources */,
 				BA0193A11B0B9A8300D04B73 /* Types.m in Sources */,
+				BA0193B61B0B9E9900D04B73 /* Quasiquoter.m in Sources */,
 				BA0193A21B0B9A8300D04B73 /* Reader.m in Sources */,
 				BA0193A31B0B9A8300D04B73 /* Printer.m in Sources */,
 				BA0193A51B0B9A8300D04B73 /* main.m in Sources */,

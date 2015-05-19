@@ -22,10 +22,13 @@
 #import "Function.h"
 #import "Environment.h"
 #import "Core.h"
+#import "Quasiquoter.h"
 #import "NSArray+Functional.h"
 
 @interface REPL ()
 @property (readonly) Environment *globalEnvironment;
+@property (readonly) Core *core;
+@property (readonly) Quasiquoter *quasiquoter;
 @end
 
 id READ(NSString *line) {
@@ -38,18 +41,26 @@ NSString *PRINT(id ast) {
 }
 
 @implementation REPL
+@synthesize quasiquoter = _quasiquoter;
 
 - (instancetype)init {
     if (self = [super init]) {
-        Core *core = [Core new];
+        _core = [Core new];
         _globalEnvironment = [[Environment alloc] initWithOuter:nil 
-                                                          binds:core.bindings 
-                                                          exprs:core.operations];
+                                                          binds:_core.bindings 
+                                                          exprs:_core.operations];
         
         [self rep:@"(def! not (fn* (a) (if a false true)))"];
         [self rep:@"(def! load-file (fn* (f) (eval (read-string (str \"(do \" (slurp f) \")\")))))"];
    }
     return self;
+}
+
+- (Quasiquoter *)quasiquoter {
+    if (!_quasiquoter) {
+        _quasiquoter = [Quasiquoter new];
+    }
+    return _quasiquoter;
 }
 
 - (id)eval_ast:(id)ast env:(Environment *)env {
@@ -72,7 +83,8 @@ NSString *PRINT(id ast) {
         }
         
         if ([[ast firstObject] isKindOfClass:[Symbol class]]) {
-            NSArray *specials = @[@"def!", @"let*", @"do", @"if", @"fn*"];
+            NSArray *specials = @[@"def!", @"let*", @"do", @"if", @"fn*", 
+                                  @"quote", @"quasiquote"];
             
             switch ([specials indexOfObject:[[ast firstObject] name]]) {
                 case 0: // def!
@@ -130,6 +142,18 @@ NSString *PRINT(id ast) {
                         
                     } params:binds env:env ast:expr];            
                 }
+                    
+                case 5: // quote
+                {
+                    return ast[1];
+                }
+                    
+                case 6: // quasiquote
+                {
+                    ast = [self.quasiquoter quasiquote:ast];
+                    continue; // tco
+                }
+                
             }
             
         }
