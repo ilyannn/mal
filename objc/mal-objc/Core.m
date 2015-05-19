@@ -46,6 +46,8 @@
              @"str":@"str:",
              @"prn":@"prn:",
              @"println":@"println:",
+             @"cons":@"cons:", 
+             @"concat":@"concat:",
              };
 }
 
@@ -122,6 +124,20 @@
     id second = args[1];
     return [[Truth alloc] initWithTruth: [first isEqualTo:second]];
 }
+
+- (NSArray *)cons:(id)args {
+    RequireElement(1, args, [NSArray class]);
+    return [@[args[0]] arrayByAddingObjectsFromArray:args[1]];
+}
+
+- (NSArray *)concat:(id)args {
+    NSMutableArray *result = [NSMutableArray new];
+    for (NSArray *arg in args) {
+        [result addObjectsFromArray:arg];
+    }
+    return [result copy];
+}
+
 
 #pragma mark - Integer functions
 
