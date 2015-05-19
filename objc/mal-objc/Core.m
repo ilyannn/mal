@@ -49,6 +49,9 @@
              @"println":@"println:",
              @"cons":@"cons:", 
              @"concat":@"concat:",
+             @"first":@"first:",
+             @"rest":@"rest:",
+             @"nth":@"nth:",
              };
 }
 
@@ -137,6 +140,24 @@
         [result addObjectsFromArray:arg];
     }
     return [result copy];
+}
+
+- (id)first:(id)args {
+    RequireElement(0, args, [NSArray class]);
+    id result = [args[0] firstObject];
+    return result ?: [NSNull null];
+}
+
+- (NSArray *)rest:(id)args {
+    RequireElement(0, args, [NSArray class]);
+    NSRange range = NSMakeRange(1, [args[0] count] - 1);
+    return [args[0] subarrayWithRange:range];
+}
+
+- (id)nth:(id)args {
+    RequireElement(0, args, [NSArray class]);
+    RequireElement(1, args, [NSNumber class]);
+    return args[0][[args[1] integerValue]];
 }
 
 
