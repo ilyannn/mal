@@ -115,18 +115,21 @@
 
 - (Truth *)listQ:(id)args {
     id first = [args firstObject];
-    return [[Truth alloc] initWithTruth:[first isKindOfClass:[NSArray class]]];
+    return [[Truth alloc] initWithTruth:[first isKindOfClass:[NSArray class]] 
+            && ![first isKindOfClass:[NSMutableArray class]]];
 }
 
 - (Truth *)emptyQ:(id)args {
     id first = [args firstObject];
-    return [[Truth alloc] initWithTruth: [first count] != 0];
+    BOOL truth = [first isKindOfClass:[NSArray class]] && [first count] == 0;
+    return [[Truth alloc] initWithTruth: truth];
 }
 
 - (Truth *)equals:(id)args {
     id first = args[0];
     id second = args[1];
-    return [[Truth alloc] initWithTruth: [first isEqualTo:second]];
+    BOOL truth = [first isEqualTo:second];
+    return [[Truth alloc] initWithTruth: truth];
 }
 
 - (NSArray *)cons:(id)args {
