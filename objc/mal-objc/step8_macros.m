@@ -63,6 +63,41 @@ NSString *PRINT(id ast) {
     return _quasiquoter;
 }
 
+
+#pragma mark - Macros support
+
+- (DefinedFunction *)is_macro_call:(id)ast env:(Environment *)env {
+    if (![ast isKindOfClass:[NSArray class]]) {
+        return nil;
+    }
+    
+    Symbol *sym = [ast firstObject];
+    if (![sym isKindOfClass:[Symbol class]]) {
+        return nil;
+    }
+    
+    DefinedFunction *def = [env getObjectForSymbol:sym];
+    if (![def isKindOfClass:[DefinedFunction class]]) {
+        return nil;
+    }
+    
+    return def.is_macro ? def : nil;
+}
+
+- (id)macroexpand:(id)ast env:(Environment *)env {
+    while (true) {
+        DefinedFunction *def = [self is_macro_call:ast env:env];
+        if (def) {
+            NSRange range = NSMakeRange(1, [ast count] - 1);
+            ast = [def evaluateWithArguments:[ast subarrayWithRange:range]];
+        } else {
+            return ast;
+        }
+    }
+}
+
+#pragma mark - Evaluation
+
 - (id)eval_ast:(id)ast env:(Environment *)env {
     if ([ast isKindOfClass:[Symbol class]]) {        // Symbol
         return [env getObjectForSymbol:ast];
@@ -82,10 +117,17 @@ NSString *PRINT(id ast) {
             return [self eval_ast:ast env:env];
         }
         
+        ast = [self macroexpand:ast env:env];
+        
+        if (![ast isKindOfClass:[NSArray class]]) {
+            return ast;
+        }
+        
         if ([[ast firstObject] isKindOfClass:[Symbol class]]) {
             
-            switch ([@[@"def!", @"let*", @"do", @"if", @"fn*"] 
+            switch ([@[@"def!", @"let*", @"do", @"if", @"fn*", @"defmacro!", @"macroexpand"] 
                      indexOfObject:[[ast firstObject] name]]) {
+                    
                 case 0: // def!
                 {
                 	id def = [self eval:ast[2] env:env];
@@ -140,6 +182,21 @@ NSString *PRINT(id ast) {
                         return [wself eval:expr env:child];
                         
                     } params:binds env:env ast:expr];            
+                }
+
+                case 5: // defmacro!
+                {
+                    DefinedFunction *def = [self eval:ast[2] env:env];
+                    Require([def isKindOfClass:[DefinedFunction class]], @"defmacro! expects a function definition", ast);
+                    
+                    def.is_macro = YES;
+                    [env set:def forSymbol:ast[1]];
+                    return def;
+                }
+                    
+                case 6: // macroexpand
+                {
+                    return [self macroexpand:ast[1] env:env];
                 }
             }
             

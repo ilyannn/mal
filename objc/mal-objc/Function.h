@@ -15,7 +15,7 @@ id RequireElement(NSUInteger index, NSArray *args, Class type);
 
 @interface Function : NSObject <Type>
 
-@property (strong) id(^body)(id);
+@property (strong, readonly) id(^body)(id);
 
 + (instancetype)operationWithIntegers:(NSInteger(^)(NSInteger, NSInteger))body;
 - (instancetype)initWithBody:(id(^)(id))body;
@@ -27,6 +27,8 @@ id RequireElement(NSUInteger index, NSArray *args, Class type);
 
 @interface DefinedFunction: Function
 - (instancetype)initWithBody:(id(^)(id))body params:(NSArray *)params env:(Environment *)env ast:(id)ast NS_DESIGNATED_INITIALIZER;
+
+@property (readwrite) BOOL is_macro;
 
 @property (readonly) id ast;
 @property (readonly) NSArray *params;
