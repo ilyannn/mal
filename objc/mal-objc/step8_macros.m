@@ -29,6 +29,7 @@
 @property (readonly) Environment *globalEnvironment;
 @property (readonly) Core *core;
 @property (readonly) Quasiquoter *quasiquoter;
+@property (readonly) NSArray *specialSymbols;
 @end
 
 id READ(NSString *line) {
@@ -46,14 +47,22 @@ NSString *PRINT(id ast) {
 - (instancetype)init {
     if (self = [super init]) {
         _core = [Core new];
-        _globalEnvironment = [[Environment alloc] initWithOuter:nil 
+        _specialSymbols = [@[@"def!", @"let*", @"do", @"if", @"fn*", @"defmacro!", @"macroexpand"] 
+                           arrayByMapping:^id(NSString *name) {
+                               return [[Symbol alloc] initWithName:name];
+                           }];
+        _globalEnvironment = [[Environment alloc] initWithOuter:[[Environment alloc] 
+                                                                 initWithOuter:nil 
+                                                                 binds:_specialSymbols 
+                                                                 exprs:_specialSymbols
+                                                                 ]
                                                           binds:_core.bindings 
                                                           exprs:_core.operations];
         
         [self rep:@"(def! not (fn* (a) (if a false true)))"];
         [self rep:@"(def! load-file (fn* (f) (eval (read-string (str \"(do \" (slurp f) \")\")))))"];
-   }
-    return self;
+    }
+	return self;
 }
 
 - (Quasiquoter *)quasiquoter {
@@ -123,10 +132,10 @@ NSString *PRINT(id ast) {
             return ast;
         }
         
-        if ([[ast firstObject] isKindOfClass:[Symbol class]]) {
+        Symbol *symbol = [ast firstObject];
+        if ([symbol isKindOfClass:[Symbol class]]) {
             
-            switch ([@[@"def!", @"let*", @"do", @"if", @"fn*", @"defmacro!", @"macroexpand"] 
-                     indexOfObject:[[ast firstObject] name]]) {
+            switch ([self.specialSymbols indexOfObject:symbol]) {
                     
                 case 0: // def!
                 {
@@ -203,7 +212,7 @@ NSString *PRINT(id ast) {
             NSArray *quotes = @[self.quasiquoter.quasiquote, self.quasiquoter.quote, 
                                 self.quasiquoter.unquote, self.quasiquoter.splice_unquote];
             
-            switch ([quotes indexOfObject:[ast firstObject]]) {
+            switch ([quotes indexOfObject:symbol]) {
                 case 0: // quasiquote
                     ast = [self.quasiquoter quasiquote:ast[1]];
                     continue; // tco
