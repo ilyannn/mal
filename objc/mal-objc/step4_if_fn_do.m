@@ -53,18 +53,30 @@ NSString *PRINT(id ast) {
 - (id)eval_ast:(id)ast env:(Environment *)env {
     if ([ast isKindOfClass:[Symbol class]]) {        // Symbol
         return [env getObjectForSymbol:ast];
+    } else if ([ast isKindOfClass:[NSMutableArray class]]) { // Vector
+        return [[ast arrayByMapping:^id(id sub) {
+            return [self eval:sub env:env];
+        }] mutableCopy];
     } else if ([ast isKindOfClass:[NSArray class]]) { // List
         return [ast arrayByMapping:^id(id sub) {
             return [self eval:sub env:env];
         }];
-    } else {
+    } else if ([ast isKindOfClass:[NSDictionary class]]) { // Map
+        NSArray *keys = [ast allKeys];
+        
+        NSArray *evalobjs = [keys arrayByMapping:^id(id key) {
+            return [self eval:ast[key] env:env];
+        }];
+        
+        return [NSDictionary dictionaryWithObjects:evalobjs forKeys:keys];
+    } {
         return ast;
     }
 }
 
 - (id)eval:(id)ast env:(Environment *)env{
     
-    if (![ast isKindOfClass:[NSArray class]]) {
+    if (![ast isKindOfClass:[NSArray class]] || [ast isKindOfClass:[NSMutableArray class]]) {
         return [self eval_ast:ast env:env];
     }
 
