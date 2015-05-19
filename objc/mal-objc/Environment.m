@@ -55,7 +55,7 @@
     if ([self.data objectForKey:symbol] != nil) {
         return self;
     }
-    return self.outer;
+    return [self.outer findEnvironmentForSymbol:symbol];
 }
 
 - (id)getObjectForSymbol:(Symbol *)symbol {
@@ -67,7 +67,9 @@
                                      userInfo:@{@"symbol" : symbol}];
     }
     
-    return env.data[symbol];
+    id result = env.data[symbol];
+    NSAssert(result != nil, @"Something went wrong");
+    return result;
 }
 
 @end
