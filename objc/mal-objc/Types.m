@@ -73,22 +73,41 @@
     return [self printReadably:NO];
 }
 
-- (NSString *)printReadably:(BOOL)print_readably {
-    return [NSString stringWithFormat:@"(%@)", [[self arrayByMapping:^id(id object) {
+- (NSString *)printReadably:(BOOL)print_readably withLeft:(NSString *)left right:(NSString *)right {
+    return [NSString stringWithFormat:@"%@%@%@", left, [[self arrayByMapping:^id(id object) {
         if (print_readably && [object respondsToSelector:@selector(printReadably:)]) {
             return [object printReadably: YES];
         } else {
             return [object print];
         }
-    }] componentsJoinedByString:@" "]];
+    }] componentsJoinedByString:@" "], right];
+}
+
+- (NSString *)printReadably:(BOOL)print_readably {
+    return [self printReadably:print_readably withLeft:@"(" right:@")"];
 }
 
 - (BOOL)truthValue {
     return true;
 }
 
+- (BOOL)isVector {
+    return NO;
+}
+
 @end
 
+@implementation NSMutableArray (Printer)
+
+- (NSString *)printReadably:(BOOL)print_readably {
+    return [self printReadably:print_readably withLeft:@"[" right:@"]"];
+}
+
+- (BOOL)isVector {
+    return YES;
+}
+
+@end
 
 @implementation Symbol
 

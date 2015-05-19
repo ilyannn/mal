@@ -25,6 +25,10 @@
 @end
 
 @interface NSArray(Type) <Type>
+@property (getter=isVector) BOOL vector;
+@end
+
+@interface NSMutableArray(Type) <Type>
 @end
 
 @interface Symbol: NSObject <Type>

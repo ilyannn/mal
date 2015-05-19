@@ -12,17 +12,19 @@
 #import "Quasiquoter.h"
 #import "Types.h"
 
-Token const RightParen = @")]";
-Token const LeftParen  = @"([";
-Token const Commenting = @";";
-Token const Quote      = @"\'";
-Token const Quasiquote = @"`";
-Token const Unquote    = @"~";
-Token const Deref      = @"@";
-Token const String     = @"\"";
+Token const ListLeft    = @"(";
+Token const VectorLeft  = @"[";
+Token const ListRight   = @")";
+Token const VectorRight = @"]";
+Token const Commenting  = @";";
+Token const Quote       = @"\'";
+Token const Quasiquote  = @"`";
+Token const Unquote     = @"~";
+Token const Deref       = @"@";
+Token const String      = @"\"";
 
-Token const True       = @"true";
-Token const False      = @"false";
+Token const True        = @"true";
+Token const False       = @"false";
 
 
 @implementation NSString (SafeFirst)
@@ -35,18 +37,6 @@ Token const False      = @"false";
 }
 @end
 
-
-@implementation NSString (Parens)
-
-- (BOOL)isRightParen {
-    return [RightParen rangeOfString:self].location != NSNotFound;
-}
-
-- (BOOL)isLeftParen {
-    return [LeftParen rangeOfString:self].location != NSNotFound;
-}
-
-@end
 
 @interface Reader()
 @property (readonly) Tokenizer *tokenizer;
@@ -70,15 +60,18 @@ Token const False      = @"false";
         static NSCharacterSet *delimiters;
         dispatch_once(&onceToken, ^{
             NSMutableCharacterSet *chars = [Tokenizer skipSet];
+
+            [chars addCharactersInString:ListLeft];
+            [chars addCharactersInString:ListRight];
+            [chars addCharactersInString:VectorLeft];
+            [chars addCharactersInString:VectorRight];
             
-            [chars addCharactersInString:RightParen];
-            [chars addCharactersInString:LeftParen];
             [chars addCharactersInString:Commenting];
+            [chars addCharactersInString:Deref];
             
             [chars addCharactersInString:Quote];
             [chars addCharactersInString:Unquote];
             [chars addCharactersInString:Quasiquote];
-            [chars addCharactersInString:Deref];
             
             delimiters = [chars copy];
         });
@@ -131,8 +124,10 @@ Token const False      = @"false";
             return [self read_deref];
             
         case '(':
+            return [self read_list: NO];
+
         case '[':
-            return [self read_list];
+            return [self read_list: YES];
             
         default:
             return [self read_atom];
@@ -165,18 +160,20 @@ Token const False      = @"false";
     return @[self.qq.quasiquote, [self read_form]];
 }
 
-- (id)read_list {
-    [self consume:LeftParen];
+- (id)read_list:(BOOL)vector {
+    [self consume: vector ? VectorLeft : ListLeft];
+    Token done = vector ? VectorRight : ListRight;
     
     NSMutableArray *elements = [NSMutableArray new];
-    while(![self.tokenizer.peek isRightParen]) {
+
+    while(![self.tokenizer.peek isEqualTo:done]) {
         id element = [self read_form]; 
         [elements addObject:element];
     }
     
-    [self consume:RightParen];
+    [self consume: done];
 
-    return [elements copy];
+    return vector ? elements : [elements copy];
 }
 
 - (id)read_atom {
