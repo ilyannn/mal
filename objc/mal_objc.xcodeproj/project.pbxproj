@@ -32,6 +32,12 @@
 		BA0193C41B0BAACB00D04B73 /* Consumers.m in Sources */ = {isa = PBXBuildFile; fileRef = BA084B0D1B0A65A0008F471C /* Consumers.m */; };
 		BA0193CC1B0BAAF100D04B73 /* step8_macros.m in Sources */ = {isa = PBXBuildFile; fileRef = BA0193CB1B0BAAF100D04B73 /* step8_macros.m */; };
 		BA0193CD1B0BAB0A00D04B73 /* step7_quote.m in Sources */ = {isa = PBXBuildFile; fileRef = BA0193B11B0B9ABA00D04B73 /* step7_quote.m */; };
+		BA0193CE1B0BBDF800D04B73 /* Quasiquoter.m in Sources */ = {isa = PBXBuildFile; fileRef = BA0193B51B0B9E9900D04B73 /* Quasiquoter.m */; };
+		BA0193CF1B0BBDF900D04B73 /* Quasiquoter.m in Sources */ = {isa = PBXBuildFile; fileRef = BA0193B51B0B9E9900D04B73 /* Quasiquoter.m */; };
+		BA0193D01B0BBDF900D04B73 /* Quasiquoter.m in Sources */ = {isa = PBXBuildFile; fileRef = BA0193B51B0B9E9900D04B73 /* Quasiquoter.m */; };
+		BA0193D11B0BBDFA00D04B73 /* Quasiquoter.m in Sources */ = {isa = PBXBuildFile; fileRef = BA0193B51B0B9E9900D04B73 /* Quasiquoter.m */; };
+		BA0193D21B0BBDFB00D04B73 /* Quasiquoter.m in Sources */ = {isa = PBXBuildFile; fileRef = BA0193B51B0B9E9900D04B73 /* Quasiquoter.m */; };
+		BA0193D31B0BBDFC00D04B73 /* Quasiquoter.m in Sources */ = {isa = PBXBuildFile; fileRef = BA0193B51B0B9E9900D04B73 /* Quasiquoter.m */; };
 		BA084AE51B0A4E75008F471C /* Tokenizer.m in Sources */ = {isa = PBXBuildFile; fileRef = BA3A5B341B0902350081CE50 /* Tokenizer.m */; };
 		BA084AE61B0A4E75008F471C /* Types.m in Sources */ = {isa = PBXBuildFile; fileRef = BA14D8CF1B095EE90073D98B /* Types.m */; };
 		BA084AE71B0A4E75008F471C /* Reader.m in Sources */ = {isa = PBXBuildFile; fileRef = BA3A5B481B090A9A0081CE50 /* Reader.m */; };
@@ -613,6 +619,7 @@
 				BA084AE51B0A4E75008F471C /* Tokenizer.m in Sources */,
 				BA084AE61B0A4E75008F471C /* Types.m in Sources */,
 				BA084AE71B0A4E75008F471C /* Reader.m in Sources */,
+				BA0193D21B0BBDFB00D04B73 /* Quasiquoter.m in Sources */,
 				BA084AE81B0A4E75008F471C /* Printer.m in Sources */,
 				BA084AE91B0A4E75008F471C /* main.m in Sources */,
 				BA084AEA1B0A4E75008F471C /* Environment.m in Sources */,
@@ -631,6 +638,7 @@
 				BA084AF91B0A5583008F471C /* Tokenizer.m in Sources */,
 				BA084AFB1B0A5583008F471C /* Types.m in Sources */,
 				BA084AFC1B0A5583008F471C /* Reader.m in Sources */,
+				BA0193D31B0BBDFC00D04B73 /* Quasiquoter.m in Sources */,
 				BA084AFD1B0A5583008F471C /* Printer.m in Sources */,
 				BA084AFE1B0A5583008F471C /* main.m in Sources */,
 				BA0193B31B0B9AC100D04B73 /* step6_file.m in Sources */,
@@ -655,6 +663,7 @@
 				BA14D8A21B09321F0073D98B /* Function.m in Sources */,
 				BA14D8941B092D800073D98B /* NSArray+Functional.m in Sources */,
 				BA14D8D31B0961280073D98B /* Types.m in Sources */,
+				BA0193CF1B0BBDF900D04B73 /* Quasiquoter.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -664,6 +673,7 @@
 			files = (
 				BA14D8A91B0938690073D98B /* Tokenizer.m in Sources */,
 				BA14D8AA1B0938690073D98B /* Reader.m in Sources */,
+				BA0193D01B0BBDF900D04B73 /* Quasiquoter.m in Sources */,
 				BA14D8AB1B0938690073D98B /* Printer.m in Sources */,
 				BA14D8AD1B0938690073D98B /* main.m in Sources */,
 				BA14D8AE1B0938690073D98B /* Environment.m in Sources */,
@@ -682,6 +692,7 @@
 				BA14D8BA1B0942C50073D98B /* Tokenizer.m in Sources */,
 				BA14D8D01B095EE90073D98B /* Types.m in Sources */,
 				BA14D8BB1B0942C50073D98B /* Reader.m in Sources */,
+				BA0193D11B0BBDFA00D04B73 /* Quasiquoter.m in Sources */,
 				BA14D8BD1B0942C50073D98B /* Printer.m in Sources */,
 				BA14D8BE1B0942C50073D98B /* main.m in Sources */,
 				BA14D8BF1B0942C50073D98B /* Environment.m in Sources */,
@@ -706,6 +717,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BA0193CE1B0BBDF800D04B73 /* Quasiquoter.m in Sources */,
 				BA3A5B361B0902390081CE50 /* Tokenizer.m in Sources */,
 				BA3A5B4A1B090AA10081CE50 /* Reader.m in Sources */,
 				BA3A5B4E1B0910090081CE50 /* Printer.m in Sources */,

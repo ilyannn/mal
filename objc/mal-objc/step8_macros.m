@@ -124,13 +124,18 @@ NSString *PRINT(id ast) {
 - (id)eval:(id)ast env:(Environment *)env{
     
     while (true) {
+
+#if DEBUG
+        NSLog(@"EVAL: %@", PRINT(ast));
+#endif
+        
         if (![ast isKindOfClass:[NSArray class]]) {
             return [self eval_ast:ast env:env];
         }
         
         ast = [self macroexpand:ast env:env];
         
-        if (![ast isKindOfClass:[NSArray class]]) {
+        if (![ast isKindOfClass:[NSArray class]] || [ast count] == 0) {
             return ast;
         }
         
@@ -175,6 +180,11 @@ NSString *PRINT(id ast) {
                 {
                     id first = [self eval:ast[1] env:env];
                     NSInteger index = [first truthValue] ? 2 : 3;
+                    
+                    if (index >= [ast count]) {
+                        return [NSNull null];
+                    }
+
                     ast = ast[index];
                     continue; // tco
                 }
@@ -231,6 +241,10 @@ NSString *PRINT(id ast) {
         }
         
         NSArray *evaluated = [self eval_ast:ast env:env];
+        if ([evaluated count] == 0) {
+            return [NSNull null];
+        }
+        
         NSRange range = NSMakeRange(1, evaluated.count - 1);
 
         id head = [evaluated firstObject]; 

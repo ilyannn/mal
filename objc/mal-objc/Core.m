@@ -150,7 +150,12 @@
 
 - (NSArray *)rest:(id)args {
     RequireElement(0, args, [NSArray class]);
-    NSRange range = NSMakeRange(1, [args[0] count] - 1);
+    
+    if ([args[0] count] == 0) {
+        return @[];
+    }
+    
+	NSRange range = NSMakeRange(1, [args[0] count] - 1);
     return [args[0] subarrayWithRange:range];
 }
 

@@ -27,6 +27,20 @@
 - (instancetype)initWithOuter:(Environment *)outer binds:(NSArray *)binds exprs:(NSArray *)exprs {
     if (self = [super init]) {
         _outer = outer;
+        NSInteger all = [binds indexOfObject:[[Symbol alloc] initWithName:@"&"]];
+        
+        if (all != NSNotFound) {            
+            NSRange range = NSMakeRange(all, exprs.count - all);
+            NSArray *rest = [exprs subarrayWithRange:range];            
+            
+            range = NSMakeRange(0, all);
+            exprs = [[exprs subarrayWithRange:range] arrayByAddingObject:rest];
+
+            NSMutableArray *mbinds = [binds mutableCopy];
+            [mbinds removeObjectAtIndex:all];
+            binds = [mbinds copy];
+		}
+        
         _data = [NSMutableDictionary dictionaryWithObjects:exprs forKeys:binds];
     }
     return self;
