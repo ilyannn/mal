@@ -17,11 +17,19 @@
 
 @implementation Tokenizer
 
++ (NSMutableCharacterSet *)skipSet {
+    NSMutableCharacterSet *skips = [NSMutableCharacterSet whitespaceAndNewlineCharacterSet];
+    [skips addCharactersInString:@","];
+    return skips;    
+}
+
 - (instancetype)initWithString:(NSString *)string 
                     delimiters:(NSCharacterSet *)delimiterSet 
 {
     if (self = [super init]) {
-        _scanner = [[NSScanner alloc] initWithString:string];
+        _scanner = [[NSScanner alloc] initWithString:string];        
+        _scanner.charactersToBeSkipped = [[self class] skipSet];
+        
         _rightDelimiters = delimiterSet;
     }
     return self;

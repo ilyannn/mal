@@ -21,6 +21,7 @@ typedef NSString * Token;
  at a time. Other characters will be grouped into tokens.
  */
 @interface Tokenizer : NSObject
++ (NSMutableCharacterSet *)skipSet;
 
 - (instancetype)initWithString:(NSString *)string 
                     delimiters:(NSCharacterSet *)delimiterSet;

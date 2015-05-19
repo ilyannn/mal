@@ -14,7 +14,7 @@
 
 Token const RightParen = @")]";
 Token const LeftParen  = @"([";
-Token const Comma      = @",";
+Token const Commenting = @";";
 Token const Quote      = @"\'";
 Token const Quasiquote = @"`";
 Token const Unquote    = @"~";
@@ -69,11 +69,11 @@ Token const False      = @"false";
         static dispatch_once_t onceToken;
         static NSCharacterSet *delimiters;
         dispatch_once(&onceToken, ^{
-            NSMutableCharacterSet *chars = [NSMutableCharacterSet whitespaceAndNewlineCharacterSet];
+            NSMutableCharacterSet *chars = [Tokenizer skipSet];
             
             [chars addCharactersInString:RightParen];
             [chars addCharactersInString:LeftParen];
-            [chars addCharactersInString:Comma];
+            [chars addCharactersInString:Commenting];
             
             [chars addCharactersInString:Quote];
             [chars addCharactersInString:Unquote];
@@ -163,9 +163,7 @@ Token const False      = @"false";
     NSMutableArray *elements = [NSMutableArray new];
     while(![self.tokenizer.peek isRightParen]) {
         id element = [self read_form]; 
-        if (![element isEqualTo:Comma]) {
-        	[elements addObject:element];
-        }
+        [elements addObject:element];
     }
     
     [self consume:RightParen];
