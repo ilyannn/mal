@@ -84,7 +84,7 @@ NSString *PRINT(id ast) {
         
         if ([[ast firstObject] isKindOfClass:[Symbol class]]) {
             NSArray *specials = @[@"def!", @"let*", @"do", @"if", @"fn*", 
-                                  @"quote", @"quasiquote"];
+                                  @"quote", @"quasiquote", @"unquote", @"splice-unquote"];
             
             switch ([specials indexOfObject:[[ast firstObject] name]]) {
                 case 0: // def!
@@ -153,7 +153,17 @@ NSString *PRINT(id ast) {
                     ast = [self.quasiquoter quasiquote:ast[1]];
                     continue; // tco
                 }
-                
+                    
+                case 7: // unquote
+                {
+                    return ast[1];
+                }
+
+                case 8: // splice-unquote
+                {
+                    return ast[1];
+                }
+                    
             }
             
         }

@@ -148,10 +148,13 @@ Token const False      = @"false";
 
 - (id)read_unquote {
     [self consume:Unquote];
+    
     if ([self.tokenizer.peek isEqualTo:AndSplice]) {
         [self consume:AndSplice];
+        return @[self.splice_unquote, [self read_form]];
     }
-    return @[self.quote, [self read_form]];
+    
+    return @[self.unquote, [self read_form]];
 }
 
 - (id)read_quasiquote {

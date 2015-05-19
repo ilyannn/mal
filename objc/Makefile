@@ -8,6 +8,9 @@ $(TARGETS): %:
 	xcodebuild -target $@
 	mv build/Release/$@ .
 
+again:
+	rm -f $(TARGETS)
+
 clean:
 	rm -rf build
 	rm -f $(TARGETS)
